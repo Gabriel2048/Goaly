@@ -21,9 +21,7 @@ class AuthenticationService {
     await FirebaseAuth.instance.signOut();
   }
 
-  bool isLoggedIn () {
-    return FirebaseAuth.instance.currentUser != null;
-  }
+  bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
 }
 
 final authenticationServiceProvider = Provider<AuthenticationService>((ref) {

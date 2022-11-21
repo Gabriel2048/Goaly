@@ -31,7 +31,7 @@ class MyApp extends ConsumerWidget {
         colorScheme: const ColorScheme.dark(),
         useMaterial3: true,
       ),
-      initialRoute: authService.isLoggedIn() ? LoggedInScreen.route : AuthScreen.route,
+      initialRoute: authService.isLoggedIn ? LoggedInScreen.route : AuthScreen.route,
       routes: {
         LoggedInScreen.route: (_) => const LoggedInScreen(),
         AuthScreen.route: (_) => const AuthScreen(),
