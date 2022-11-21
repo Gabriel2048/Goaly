@@ -13,7 +13,6 @@ class LoggedInScreen extends StatefulWidget {
 }
 
 class _LoggedInScreenState extends State<LoggedInScreen> {
-
   void _onLogout() async {
     final navigator = Navigator.of(context);
     await AuthService().logOut();
@@ -30,9 +29,7 @@ class _LoggedInScreenState extends State<LoggedInScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FirebaseAuth.instance.currentUser != null
-                ? Text(FirebaseAuth.instance.currentUser!.email!)
-                : const Text("no user"),
+            Text(FirebaseAuth.instance.currentUser!.email!),
             ElevatedButton.icon(
               onPressed: _onLogout,
               icon: const Icon(Icons.logout),
