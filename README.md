@@ -1,0 +1,2 @@
+# Goaly
+Goals tracking app
