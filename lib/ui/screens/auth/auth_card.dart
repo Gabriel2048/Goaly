@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:goaly/services/auth.dart';
+import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
 
 class AuthCard extends StatefulWidget {
   const AuthCard({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class AuthCard extends StatefulWidget {
   State<AuthCard> createState() => _AuthCardState();
 }
 
-class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin{
+class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
   late final AnimationController _signInController = AnimationController(
     duration: const Duration(milliseconds: 1200),
     vsync: this,
@@ -18,17 +19,24 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin{
   @override
   void dispose() {
     super.dispose();
+    _signInController.stop();
     _signInController.dispose();
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(const Duration(milliseconds: 3000)).then((value) {
-        _signInController.forward();
-      });
+    Future.delayed(const Duration(milliseconds: 3000)).then((value) {
+      _signInController.forward();
     });
+  }
+
+  void _onLogin() async {
+    final navigator = Navigator.of(context);
+    final credentials = await AuthService().startGoogleAuth();
+    if(credentials != null){
+      navigator.pushReplacementNamed(LoggedInScreen.route);
+    }
   }
 
   @override
@@ -53,7 +61,7 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin{
           child: Center(
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(fixedSize: const Size(230, 60)),
-              onPressed: AuthService().startGoogleAuth,
+              onPressed: _onLogin,
               icon: const Icon(FontAwesomeIcons.google),
               label: const Text("Sign in with Google"),
             ),

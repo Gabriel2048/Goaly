@@ -30,16 +30,15 @@ class _FadingSlideTransitionState extends State<FadingSlideTransition>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Future.delayed(widget.startDelay).then((value) {
-        _controller.forward();
-      });
+    Future.delayed(widget.startDelay).then((value) {
+      _controller.forward();
     });
   }
 
   @override
   void dispose() {
     super.dispose();
+    _controller.stop();
     _controller.dispose();
   }
 

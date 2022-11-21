@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:goaly/firebase_options.dart';
-import 'package:goaly/ui/landing_screen.dart';
+import 'package:goaly/ui/screens/auth/auth_screen.dart';
+import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +25,13 @@ class MyApp extends StatelessWidget {
         colorScheme: const ColorScheme.dark(),
         useMaterial3: true,
       ),
-      home: const LandingScreen(),
+      initialRoute:
+          FirebaseAuth.instance.currentUser != null ? LoggedInScreen.route : AuthScreen.route,
+      routes: {
+        LoggedInScreen.route: (_) => const LoggedInScreen(),
+        AuthScreen.route: (_) => const AuthScreen(),
+      },
+      // home: const LandingScreen(),
     );
   }
 }
