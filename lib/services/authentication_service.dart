@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class AuthService {
+class AuthenticationService {
   static final _googleSignIn = GoogleSignIn();
 
   Future<UserCredential?> startGoogleAuth() async {
@@ -19,4 +20,13 @@ class AuthService {
     await _googleSignIn.disconnect();
     await FirebaseAuth.instance.signOut();
   }
+
+  bool isLoggedIn () {
+    return FirebaseAuth.instance.currentUser != null;
+  }
 }
+
+final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
+
+  return AuthenticationService();
+});

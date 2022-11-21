@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:goaly/services/auth.dart';
+import 'package:goaly/services/authentication_service.dart';
 import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AuthCard extends StatefulWidget {
   const AuthCard({Key? key}) : super(key: key);
@@ -31,14 +32,6 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
     });
   }
 
-  void _onLogin() async {
-    final navigator = Navigator.of(context);
-    final credentials = await AuthService().startGoogleAuth();
-    if(credentials != null){
-      navigator.pushReplacementNamed(LoggedInScreen.route);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
@@ -59,11 +52,22 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             ),
           ),
           child: Center(
-            child: ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(fixedSize: const Size(230, 60)),
-              onPressed: _onLogin,
-              icon: const Icon(FontAwesomeIcons.google),
-              label: const Text("Sign in with Google"),
+            child: Consumer(
+              builder: (_, WidgetRef ref, __) {
+                return ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(fixedSize: const Size(230, 60)),
+                  onPressed: () async {
+                    final authService = ref.watch(authenticationServiceProvider);
+                    final navigator = Navigator.of(context);
+                    final credentials = await authService.startGoogleAuth();
+                    if (credentials != null) {
+                      navigator.pushReplacementNamed(LoggedInScreen.route);
+                    }
+                  },
+                  icon: const Icon(FontAwesomeIcons.google),
+                  label: const Text("Sign in with Google"),
+                );
+              },
             ),
           ),
         ),
