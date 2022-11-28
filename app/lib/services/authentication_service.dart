@@ -2,8 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+const scopes = ["https://www.googleapis.com/auth/admin.directory.resource.calendar"];
+
 class AuthenticationService {
-  static final _googleSignIn = GoogleSignIn(scopes: ["https://www.googleapis.com/auth/admin.directory.resource.calendar"]);
+  static final _googleSignIn = GoogleSignIn(scopes: scopes);
 
   Future<UserCredential?> startGoogleAuth() async {
     final selectedGoogleAccount = await _googleSignIn.signIn();
