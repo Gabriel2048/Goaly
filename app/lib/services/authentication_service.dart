@@ -3,7 +3,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthenticationService {
-  static final _googleSignIn = GoogleSignIn();
+  static final _googleSignIn = GoogleSignIn(scopes: ["https://www.googleapis.com/auth/admin.directory.resource.calendar"]);
 
   Future<UserCredential?> startGoogleAuth() async {
     final selectedGoogleAccount = await _googleSignIn.signIn();
