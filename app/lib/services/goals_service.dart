@@ -2,11 +2,11 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GoalsService {
-  final FirebaseFunctions functions = FirebaseFunctions.instance;
-  final defaultOptions = HttpsCallableOptions(timeout: const Duration(seconds: 3));
+  final FirebaseFunctions _functions = FirebaseFunctions.instance;
+  final _defaultOptions = HttpsCallableOptions(timeout: const Duration(seconds: 3));
 
   Future<HttpsCallableResult<dynamic>> _callWithDefaultTimeout(Functions function) {
-    return functions.httpsCallable(function.name, options: defaultOptions).call();
+    return _functions.httpsCallable(function.name, options: _defaultOptions).call();
   }
 
   void addGoal() async {
