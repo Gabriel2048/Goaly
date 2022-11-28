@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/ui/screens/auth/auth_app_bar.dart';
 import 'package:goaly/ui/screens/auth/auth_card.dart';
-import 'package:goaly/ui/widgets/fading_slide_transition.dart';
+import 'package:goaly/ui/widgets/infrastructure/fading_slide_transition.dart';
 
 class AuthScreen extends StatelessWidget {
   static const String route = "AuthScreen";
