@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goaly/services/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:goaly/ui/widgets/goals/new_goal.dart';
 
 class LoggedInScreen extends StatefulWidget {
   static const String route = "LoggedScreen";
