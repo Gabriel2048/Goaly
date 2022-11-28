@@ -30,6 +30,7 @@ class _LoggedInScreenState extends State<LoggedInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(FirebaseAuth.instance.currentUser!.email!),
+            const NewGoal(),
             ElevatedButton.icon(
               onPressed: _onLogout,
               icon: const Icon(Icons.logout),
