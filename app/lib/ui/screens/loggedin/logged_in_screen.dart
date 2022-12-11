@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/services/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:goaly/ui/widgets/goals/new_goal.dart';
 
 class LoggedInScreen extends StatefulWidget {
@@ -30,13 +29,12 @@ class _LoggedInScreenState extends State<LoggedInScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(FirebaseAuth.instance.currentUser!.email!),
             const NewGoal(),
             ElevatedButton.icon(
               onPressed: _onLogout,
               icon: const Icon(Icons.logout),
               label: const Text("log out"),
-            )
+            ),
           ],
         ),
       ),

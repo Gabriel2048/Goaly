@@ -5,6 +5,7 @@ import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goaly/ui/screens/new_goal/new_goal_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +36,7 @@ class MyApp extends ConsumerWidget {
       routes: {
         LoggedInScreen.route: (_) => const LoggedInScreen(),
         AuthScreen.route: (_) => const AuthScreen(),
+        NewGoalScreen.route: (_) => const NewGoalScreen(),
       },
       // home: const LandingScreen(),
     );
