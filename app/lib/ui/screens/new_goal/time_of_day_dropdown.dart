@@ -1,34 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:goaly/domain/goal_time_of_day.dart';
 
 class TimeOfDayDropdown extends StatelessWidget {
   const TimeOfDayDropdown({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButtonFormField<String>(
+    return DropdownButtonFormField<GoalTimeOfDay>(
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
         labelText: 'Time of day',
       ),
       items: const [
         DropdownMenuItem(
-          value: 'Morning',
+          value: GoalTimeOfDay.morning,
           child: Text('Morning'),
         ),
         DropdownMenuItem(
-          value: 'Midday',
+          value: GoalTimeOfDay.midday,
           child: Text('Midday'),
         ),
         DropdownMenuItem(
-          value: 'Evening',
+          value: GoalTimeOfDay.evening,
           child: Text('Evening'),
         ),
         DropdownMenuItem(
-          value: 'Anytime',
+          value: GoalTimeOfDay.anytime,
           child: Text('Anytime'),
         )
       ],
-      onChanged: (String? value) {},
+      onChanged: (GoalTimeOfDay? value) {},
     );
   }
 }

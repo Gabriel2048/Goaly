@@ -14,7 +14,7 @@ class NewGoalScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
       ),
       body: const Padding(
-        padding: EdgeInsets.all(35),
+        padding: EdgeInsets.only(left: 35, right: 35, top: 35),
         child: NewGoalForm(),
       ),
     );

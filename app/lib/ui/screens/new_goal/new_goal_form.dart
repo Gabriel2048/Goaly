@@ -11,6 +11,8 @@ class NewGoalForm extends StatefulWidget {
 class _NewGoalFormState extends State<NewGoalForm> {
   final _formKey = GlobalKey<FormState>();
 
+  final _spacing = const SizedBox(height: 40);
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -22,26 +24,35 @@ class _NewGoalFormState extends State<NewGoalForm> {
               border: OutlineInputBorder(),
               labelText: 'Frequency',
             ),
-            items: [
+            items: const [
               DropdownMenuItem(
-                child: Text('123'),
                 value: '321',
+                child: Text('123'),
               )
             ],
             onChanged: (String? value) {},
           ),
+          _spacing,
           const TimeOfDayDropdown(),
+          _spacing,
           TextFormField(
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
               labelText: 'Description (optional)',
             ),
           ),
+          _spacing,
           ElevatedButton.icon(
             onPressed: () {},
-            icon: const Icon(Icons.add),
-            label: const Text('Add your goal'),
-          )
+            icon: const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: Icon(Icons.add),
+            ),
+            label: const Padding(
+              padding: EdgeInsets.only(top: 20, right: 20, bottom: 20),
+              child: Text('Add your goal'),
+            ),
+          ),
         ],
       ),
     );
