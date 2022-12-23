@@ -1,16 +1,18 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goaly/domain/goal.dart';
 
 class GoalsService {
   final FirebaseFunctions _functions = FirebaseFunctions.instance;
-  final _defaultOptions = HttpsCallableOptions(timeout: const Duration(seconds: 3));
+  final _defaultOptions = HttpsCallableOptions(timeout: const Duration(seconds: 16));
 
-  Future<HttpsCallableResult<dynamic>> _callWithDefaultTimeout(Functions function) {
-    return _functions.httpsCallable(function.name, options: _defaultOptions).call();
+  Future<HttpsCallableResult<dynamic>> _callWithDefaultTimeout(Functions function,
+      {dynamic arguments}) {
+    return _functions.httpsCallable(function.name, options: _defaultOptions).call(arguments);
   }
 
-  void addGoal() async {
-    final result = await _callWithDefaultTimeout(Functions.addGoal);
+  Future<HttpsCallableResult<dynamic>> addGoal(Goal goal) {
+    return _callWithDefaultTimeout(Functions.addGoal, arguments: goal.toMap());
   }
 }
 

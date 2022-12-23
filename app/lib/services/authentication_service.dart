@@ -2,8 +2,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const scopes = ["https://www.googleapis.com/auth/admin.directory.resource.calendar"];
+const scopes = [
+  "https://www.googleapis.com/auth/calendar",
+  "https://www.googleapis.com/auth/calendar.events",
+  "https://www.googleapis.com/auth/calendar.events.readonly",
+  "https://www.googleapis.com/auth/calendar.readonly",
+  "https://www.googleapis.com/auth/calendar.settings.readonly"
+];
 
+//, serverClientId: '1097958491137-d2qfdd0u228cron98o4d0imhc1bdjjjl.apps.googleusercontent.com'
 class AuthenticationService {
   static final _googleSignIn = GoogleSignIn(scopes: scopes);
 
@@ -24,9 +31,12 @@ class AuthenticationService {
   }
 
   bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
+
+  User get currentUser => FirebaseAuth.instance.currentUser!;
+
+  GoogleSignIn get q => _googleSignIn;
 }
 
 final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
-
   return AuthenticationService();
 });
