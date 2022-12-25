@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:goaly/services/authentication_service.dart';
+import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/widgets/goals/new_goal.dart';
 

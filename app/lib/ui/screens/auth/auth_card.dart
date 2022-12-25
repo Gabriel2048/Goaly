@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goaly/services/authentication_service.dart';
+import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

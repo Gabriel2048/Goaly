@@ -2,7 +2,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goaly/firebase_options.dart';
-import 'package:goaly/services/authentication_service.dart';
+import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
 import 'package:firebase_core/firebase_core.dart';

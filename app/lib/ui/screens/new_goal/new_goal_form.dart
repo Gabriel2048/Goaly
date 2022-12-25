@@ -21,13 +21,6 @@ class _NewGoalFormState extends State<NewGoalForm> {
 
   final _formData = {};
 
-  void _submitForm() {
-    if (_formKey.currentState?.validate() ?? false) {
-      _formKey.currentState?.save();
-      print(_formData);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(

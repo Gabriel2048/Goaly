@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:goaly/services/google_authentication_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goaly/services/authentication/google_authentication_service.dart';
 
 class AuthenticationService {
   final GoogleAuthenticationService _googleAuthenticationService;
