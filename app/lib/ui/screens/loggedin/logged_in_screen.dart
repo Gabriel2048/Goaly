@@ -13,11 +13,6 @@ class LoggedInScreen extends StatefulWidget {
 }
 
 class _LoggedInScreenState extends State<LoggedInScreen> {
-  void _onLogout() async {
-    final navigator = Navigator.of(context);
-    await AuthenticationService().logOut();
-    navigator.pushReplacementNamed(AuthScreen.route);
-  }
 
   @override
   Widget build(BuildContext context) {
