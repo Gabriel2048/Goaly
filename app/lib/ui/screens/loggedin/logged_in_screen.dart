@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/services/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/widgets/goals/new_goal.dart';
@@ -32,17 +30,10 @@ class _LoggedInScreenState extends State<LoggedInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const NewGoal(),
-            Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                final a = ref.watch(authenticationServiceProvider);
-                return ElevatedButton.icon(
-                  onPressed: () {
-                    _a(a);
-                  },
-                  icon: const Icon(Icons.logout),
-                  label: const Text("log out"),
-                );
-              },
+            ElevatedButton.icon(
+              onPressed: _onLogout,
+              icon: const Icon(Icons.logout),
+              label: const Text("log out"),
             ),
           ],
         ),
