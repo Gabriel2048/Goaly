@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/services/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/widgets/goals/new_goal.dart';
@@ -25,10 +26,17 @@ class _LoggedInScreenState extends State<LoggedInScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const NewGoal(),
-            ElevatedButton.icon(
-              onPressed: _onLogout,
-              icon: const Icon(Icons.logout),
-              label: const Text("log out"),
+            Consumer(
+              builder: (_, ref, __) => ElevatedButton.icon(
+                onPressed: () async {
+                  final authService = ref.watch(authenticationServiceProvider);
+                  final navigator = Navigator.of(context);
+                  await authService.logOut();
+                  navigator.pushReplacementNamed(AuthScreen.route);
+                },
+                icon: const Icon(Icons.logout),
+                label: const Text("log out"),
+              ),
             ),
           ],
         ),
