@@ -1,27 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:goaly/services/google_authentication_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const scopes = [
-  "https://www.googleapis.com/auth/calendar.events",
-];
-
 class AuthenticationService {
-  static final _googleSignIn = GoogleSignIn(scopes: scopes);
+  final GoogleAuthenticationService _googleAuthenticationService;
+
+  AuthenticationService(this._googleAuthenticationService);
 
   Future<UserCredential?> startGoogleAuth() async {
-    final selectedGoogleAccount = await _googleSignIn.signIn();
+    final selectedGoogleAccount = await _googleAuthenticationService.startGoogleAuth();
     if (selectedGoogleAccount != null) {
-      final authenticationResult = await selectedGoogleAccount.authentication;
-      final cred = GoogleAuthProvider.credential(
-          accessToken: authenticationResult.accessToken, idToken: authenticationResult.idToken);
-      return await FirebaseAuth.instance.signInWithCredential(cred);
+      return FirebaseAuth.instance.signInWithCredential(selectedGoogleAccount);
     }
     return null;
   }
 
   Future<void> logOut() async {
-    await _googleSignIn.disconnect();
+    await _googleAuthenticationService.disconnect();
     await FirebaseAuth.instance.signOut();
   }
 
@@ -29,10 +24,9 @@ class AuthenticationService {
 
   User get currentUser => FirebaseAuth.instance.currentUser
       ?? (throw Exception("Attempted to use currentUser while no user logged in. Use this getter in conjunction with isLoggedIn."));
-
-  GoogleSignIn get q => _googleSignIn;
 }
 
 final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
-  return AuthenticationService();
+  final googleAuthService = ref.watch(googleAuthenticationServiceProvider);
+  return AuthenticationService(googleAuthService);
 });
