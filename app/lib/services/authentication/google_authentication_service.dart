@@ -14,7 +14,8 @@ class GoogleAuthenticationService {
     if (selectedGoogleAccount != null) {
       final authenticationResult = await selectedGoogleAccount.authentication;
       return GoogleAuthProvider.credential(
-          accessToken: authenticationResult.accessToken, idToken: authenticationResult.idToken);
+          accessToken: authenticationResult.accessToken,
+          idToken: authenticationResult.idToken);
     }
     return null;
   }
@@ -25,14 +26,29 @@ class GoogleAuthenticationService {
 
   Future<bool> get isLoggedIn => _googleSignIn.isSignedIn();
 
-  GoogleSignInAccount get currentUser => _googleSignIn.currentUser
-      ?? (throw Exception("Attempted to use currentUser while no user logged in. Use this getter in conjunction with isLoggedIn."));
+  Future<GoogleSignInAuthentication> getAuthentication(
+      {bool silentSignIn = true}) async {
+    if (silentSignIn) {
+      await _silentSignInIfNeeded();
+    }
+    return currentUser.authentication;
+  }
 
-  Future<void> disconnect() {
-    return _googleSignIn.disconnect();
+  GoogleSignInAccount get currentUser {
+    return _googleSignIn.currentUser ??
+        (throw Exception(
+            "Attempted to use currentUser while no user logged in. Use this getter in conjunction with isLoggedIn."));
+  }
+
+  Future<void> _silentSignInIfNeeded() {
+    if (_googleSignIn.currentUser == null) {
+      return _googleSignIn.signInSilently();
+    }
+    return Future.value();
   }
 }
 
-final googleAuthenticationServiceProvider = Provider<GoogleAuthenticationService>((ref) {
+final googleAuthenticationServiceProvider =
+    Provider<GoogleAuthenticationService>((ref) {
   return GoogleAuthenticationService();
 });
