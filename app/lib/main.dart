@@ -1,3 +1,5 @@
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:goaly/firebase_options.dart';
 import 'package:goaly/services/authentication_service.dart';
@@ -12,6 +14,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  FirebaseFunctions.instance.useFunctionsEmulator("192.168.0.106", 5001);
+  FirebaseAuth.instance.useAuthEmulator("192.168.0.106", 9099);
   runApp(
     const ProviderScope(
       child: MyApp(),
