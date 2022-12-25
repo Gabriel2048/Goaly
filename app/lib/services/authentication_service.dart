@@ -10,7 +10,6 @@ const scopes = [
   "https://www.googleapis.com/auth/calendar.settings.readonly"
 ];
 
-//, serverClientId: '1097958491137-d2qfdd0u228cron98o4d0imhc1bdjjjl.apps.googleusercontent.com'
 class AuthenticationService {
   static final _googleSignIn = GoogleSignIn(scopes: scopes);
 
