@@ -31,7 +31,8 @@ class AuthenticationService {
 
   bool get isLoggedIn => FirebaseAuth.instance.currentUser != null;
 
-  User get currentUser => FirebaseAuth.instance.currentUser!;
+  User get currentUser => FirebaseAuth.instance.currentUser
+      ?? (throw Exception("Attempted to use currentUser while no user logged in. Use this getter in conjunction with isLoggedIn."));
 
   GoogleSignIn get q => _googleSignIn;
 }
