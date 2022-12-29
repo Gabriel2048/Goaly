@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
 import { calendar } from "@googleapis/calendar";
-import { GoogleOauthClientFactory } from "./services/googleOauthService";
+import { GoogleOauthClientFactory } from "./services/googleOauthClientFactory ";
 
 type AddGoalRequest = {
   googleAccessToken: string;
