@@ -1,4 +1,4 @@
-import {  auth } from "@googleapis/calendar";
+import { auth } from "@googleapis/calendar";
 
 export class GoogleOauthClientFactory {
     static createFromToken(googleAccessToken: string) {

@@ -1,5 +1,5 @@
 import * as functions from "firebase-functions";
-import { calendar, } from "@googleapis/calendar";
+import { calendar } from "@googleapis/calendar";
 import { GoogleOauthClientFactory } from "./services/googleOauthService";
 
 type AddGoalRequest = {
