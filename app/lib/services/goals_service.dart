@@ -18,7 +18,11 @@ class GoalsService {
 
   Future<HttpsCallableResult<dynamic>> addGoal(Goal goal) async {
     final authentication = await _googleAuthenticationService.getAuthentication();
-    return _callWithDefaultTimeout(Functions.addGoal, arguments: goal.toMap());
+    final arguments = {
+      'googleAccessToken': authentication.accessToken,
+      'goal': goal.toMap()
+    };
+    return _callWithDefaultTimeout(Functions.addGoal, arguments: arguments);
   }
 }
 

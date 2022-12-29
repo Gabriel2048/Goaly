@@ -4,18 +4,19 @@
     "lint": "eslint --fix --ext .js,.ts .",
     "build": "tsc",
     "build:watch": "tsc --watch",
-    "serve": "npm run build && firebase emulators:start --only functions",
+    "serve": "npm run build && firebase emulators:start",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "logs": "firebase functions:log"
   },
   "engines": {
-    "node": "16"
+    "node": "18"
   },
   "main": "lib/index.js",
   "dependencies": {
-    "firebase-admin": "^10.0.2",
+    "@googleapis/calendar": "^3.0.0",
+    "firebase-admin": "^10.3.0",
     "firebase-functions": "^4.1.0"
   },
   "devDependencies": {
