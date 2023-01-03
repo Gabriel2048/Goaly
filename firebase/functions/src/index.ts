@@ -29,7 +29,12 @@ export const addGoal = functions.https.onCall(async (request: AddGoalRequest, _c
     },
   });
 
-  return {message: "", code: 200};
+  await GoalyCollections.goalsOfUser(_context.auth!.uid).add({
+    'name': "[Goaly] My event",
+    'eventId': event.data.id
+  });
+
+  return { message: "", code: 200 };
 });
 
 export const addNewUserToUsersCollection = functions.auth.user().onCreate(async (user) => {
