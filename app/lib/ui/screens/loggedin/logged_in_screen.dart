@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:goaly/services/authentication/authentication_service.dart';
-import 'package:goaly/ui/screens/auth/auth_screen.dart';
+import 'package:goaly/ui/widgets/app_drawer.dart';
 import 'package:goaly/ui/widgets/goals/new_goal.dart';
 
 class LoggedInScreen extends StatefulWidget {
@@ -14,32 +12,15 @@ class LoggedInScreen extends StatefulWidget {
 }
 
 class _LoggedInScreenState extends State<LoggedInScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Goaly'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const NewGoal(),
-            Consumer(
-              builder: (_, ref, __) => ElevatedButton.icon(
-                onPressed: () async {
-                  final authService = ref.watch(authenticationServiceProvider);
-                  final navigator = Navigator.of(context);
-                  await authService.logOut();
-                  navigator.pushReplacementNamed(AuthScreen.route);
-                },
-                icon: const Icon(Icons.logout),
-                label: const Text("log out"),
-              ),
-            ),
-          ],
-        ),
+      drawer: const AppDrawer(),
+      body: const Center(
+        child: NewGoal(),
       ),
     );
   }
