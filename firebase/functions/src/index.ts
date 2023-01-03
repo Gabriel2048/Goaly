@@ -7,6 +7,7 @@ admin.initializeApp()
 
 type AddGoalRequest = {
   googleAccessToken: string;
+  goal: object
 }
 
 export const addGoal = functions.https.onCall(async (request: AddGoalRequest, _context) => {
@@ -30,7 +31,7 @@ export const addGoal = functions.https.onCall(async (request: AddGoalRequest, _c
   });
 
   await GoalyCollections.goalsOfUser(_context.auth!.uid).add({
-    'name': "[Goaly] My event",
+    ...request.goal,
     'eventId': event.data.id
   });
 
