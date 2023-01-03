@@ -33,7 +33,7 @@ class GoalsService {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getCurrentUserGoalsSnapshots() {
-    final goalsQuery = GoalyCollections.GoalsOfCurrentUser();
+    final goalsQuery = GoalyCollections.goalsOfCurrentUser();
 
     return goalsQuery.snapshots();
   }
