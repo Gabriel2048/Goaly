@@ -14,8 +14,9 @@ class NewGoalForm extends StatefulWidget {
 
 class _NewGoalFormState extends State<NewGoalForm> {
   final _formKey = GlobalKey<FormState>();
-  static const _descriptionKey = 'description';
   static const _timeOfDayKey = 'timeOfDay';
+  static const _titleKey = 'title';
+  static const _descriptionKey = 'description';
 
   final _spacing = const SizedBox(height: 40);
 
@@ -31,6 +32,17 @@ class _NewGoalFormState extends State<NewGoalForm> {
             onSaved: (GoalTimeOfDay? value) {
               _formData[_timeOfDayKey] = value;
             },
+          ),
+          _spacing,
+          TextFormField(
+            initialValue: 'Gym',
+            onSaved: (String? value) {
+              _formData[_titleKey] = value;
+            },
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: 'Title (required)',
+            ),
           ),
           _spacing,
           TextFormField(
@@ -52,6 +64,7 @@ class _NewGoalFormState extends State<NewGoalForm> {
                   _formKey.currentState?.save();
                   goalsService.addGoal(Goal(
                     goalTimeOfDay: _formData[_timeOfDayKey],
+                    title: _formData[_titleKey],
                     description: _formData[_descriptionKey],
                   ));
                 }
