@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
-import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
+import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -61,7 +61,7 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                     final navigator = Navigator.of(context);
                     final credentials = await authService.startGoogleAuth();
                     if (credentials != null) {
-                      navigator.pushReplacementNamed(LoggedInScreen.route);
+                      navigator.pushReplacementNamed(GoalsScreen.route);
                     }
                   },
                   icon: const Icon(FontAwesomeIcons.google),

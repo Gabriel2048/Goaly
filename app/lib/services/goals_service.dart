@@ -9,7 +9,7 @@ class GoalsService {
   GoalsService(this._googleAuthenticationService);
 
   final FirebaseFunctions _functions = FirebaseFunctions.instance;
-  final _defaultOptions = HttpsCallableOptions(timeout: const Duration(seconds: 16));
+  final _defaultOptions = HttpsCallableOptions(timeout: const Duration(minutes: 1600));
 
   Future<HttpsCallableResult<dynamic>> _callWithDefaultTimeout(Functions function,
       {dynamic arguments}) {

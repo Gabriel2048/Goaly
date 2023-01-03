@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:goaly/firebase_options.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
-import 'package:goaly/ui/screens/loggedin/logged_in_screen.dart';
+import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/ui/screens/new_goal/new_goal_screen.dart';
@@ -36,9 +36,9 @@ class MyApp extends ConsumerWidget {
         colorScheme: const ColorScheme.dark(),
         useMaterial3: true,
       ),
-      initialRoute: authService.isLoggedIn ? LoggedInScreen.route : AuthScreen.route,
+      initialRoute: authService.isLoggedIn ? GoalsScreen.route : AuthScreen.route,
       routes: {
-        LoggedInScreen.route: (_) => const LoggedInScreen(),
+        GoalsScreen.route: (_) => const GoalsScreen(),
         AuthScreen.route: (_) => const AuthScreen(),
         NewGoalScreen.route: (_) => const NewGoalScreen(),
       },
