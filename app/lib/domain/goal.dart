@@ -5,7 +5,8 @@ class Goal {
   final String title;
   final String? description;
 
-  const Goal({required this.goalTimeOfDay, required this.title, this.description});
+  const Goal(
+      {required this.goalTimeOfDay, required this.title, this.description});
 
   Map<String, String> toMap() {
     return {
@@ -13,5 +14,13 @@ class Goal {
       'title': title,
       'description': description.toString(),
     };
+  }
+
+  factory Goal.fromMap(Map<String, dynamic> map) {
+    return Goal(
+      goalTimeOfDay: GoalTimeOfDay.values.byName(map['goalTimeOfDay']),
+      title: map['title'],
+      description: map['description'],
+    );
   }
 }
