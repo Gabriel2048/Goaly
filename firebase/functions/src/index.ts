@@ -1,31 +1,30 @@
 import * as functions from "firebase-functions";
-import { calendar } from "@googleapis/calendar";
-import { GoogleOauthClientFactory } from "./services/googleOauthClientFactory ";
+import {calendar} from "@googleapis/calendar";
+import {GoogleOauthClientFactory} from "./services/googleOauthClientFactory ";
 
 type AddGoalRequest = {
   googleAccessToken: string;
 }
 
-export const addGoal = functions.https.onCall(async (request: AddGoalRequest, context) => {
-
+export const addGoal = functions.https.onCall(async (request: AddGoalRequest, _context) => {
   const auth = GoogleOauthClientFactory.createFromToken(request.googleAccessToken);
 
   const calendarClient = calendar("v3");
   await calendarClient.events.insert({
-    calendarId: 'primary',
+    calendarId: "primary",
     auth,
     requestBody: {
-      summary: '[Goaly] My event',
+      summary: "[Goaly] My event",
       start: {
-        dateTime: '2022-12-29T09:00:00',
-        timeZone: 'America/New_York',
+        dateTime: "2022-12-29T09:00:00",
+        timeZone: "America/New_York",
       },
       end: {
-        dateTime: '2022-12-29T10:00:00',
-        timeZone: 'America/New_York',
+        dateTime: "2022-12-29T10:00:00",
+        timeZone: "America/New_York",
       },
-    }
-  })
+    },
+  });
 
-  return { message: "", code: 200 };
+  return {message: "", code: 200};
 });
