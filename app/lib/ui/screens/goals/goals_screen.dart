@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:goaly/ui/widgets/app_drawer.dart';
 import 'package:goaly/ui/widgets/goals/new_goal.dart';
 
-class LoggedInScreen extends StatefulWidget {
+class GoalsScreen extends StatefulWidget {
   static const String route = "LoggedScreen";
 
-  const LoggedInScreen({Key? key}) : super(key: key);
+  const GoalsScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoggedInScreen> createState() => _LoggedInScreenState();
+  State<GoalsScreen> createState() => _GoalsScreenState();
 }
 
-class _LoggedInScreenState extends State<LoggedInScreen> {
+class _GoalsScreenState extends State<GoalsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
