@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/domain/goal.dart';
+import 'package:goaly/services/GoalyCollections.dart';
 import 'package:goaly/services/authentication/google_authentication_service.dart';
 
 class GoalsService {
@@ -33,11 +33,7 @@ class GoalsService {
   }
 
   Stream<QuerySnapshot<Map<String, dynamic>>> getCurrentUserGoalsSnapshots() {
-    final userId = FirebaseAuth.instance.currentUser!.uid;
-    final goalsQuery = FirebaseFirestore.instance
-        .collection('users')
-        .doc(userId)
-        .collection('goals');
+    final goalsQuery = GoalyCollections.GoalsOfCurrentUser();
 
     return goalsQuery.snapshots();
   }
