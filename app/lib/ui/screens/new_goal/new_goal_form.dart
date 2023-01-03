@@ -28,12 +28,6 @@ class _NewGoalFormState extends State<NewGoalForm> {
       key: _formKey,
       child: Column(
         children: [
-          TimeOfDayDropdown(
-            onSaved: (GoalTimeOfDay? value) {
-              _formData[_timeOfDayKey] = value;
-            },
-          ),
-          _spacing,
           TextFormField(
             initialValue: 'Gym',
             onSaved: (String? value) {
@@ -43,6 +37,12 @@ class _NewGoalFormState extends State<NewGoalForm> {
               border: OutlineInputBorder(),
               labelText: 'Title (required)',
             ),
+          ),
+          _spacing,
+          TimeOfDayDropdown(
+            onSaved: (GoalTimeOfDay? value) {
+              _formData[_timeOfDayKey] = value;
+            },
           ),
           _spacing,
           TextFormField(
