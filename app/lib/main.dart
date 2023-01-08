@@ -1,6 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:goaly/firebase_options.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
@@ -12,6 +13,10 @@ import 'package:goaly/ui/screens/new_goal/new_goal_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
