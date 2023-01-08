@@ -34,7 +34,9 @@ class AddGoalScreen extends StatelessWidget {
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {
                   final addableGoals = ref.watch(addableGoalsProvider);
                   return ListView.separated(
-                    itemBuilder: (_, __) => const AddGoalCard(),
+                    itemBuilder: (_, int index) => AddGoalCard(
+                      addableGoal: addableGoals[index],
+                    ),
                     separatorBuilder: (_, __) => child!,
                     itemCount: addableGoals.length,
                   );
