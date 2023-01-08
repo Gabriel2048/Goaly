@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/domain/goal.dart';
+import 'package:goaly/domain/goal_frequency.dart';
 import 'package:goaly/domain/goal_time_of_day.dart';
 import 'package:goaly/services/goals_service.dart';
+import 'package:goaly/ui/screens/new_goal/frequency_dropdown.dart';
 import 'package:goaly/ui/screens/new_goal/time_of_day_dropdown.dart';
 
 class NewGoalForm extends StatefulWidget {
@@ -37,6 +39,12 @@ class _NewGoalFormState extends State<NewGoalForm> {
               border: OutlineInputBorder(),
               labelText: 'Title (required)',
             ),
+          ),
+          _spacing,
+          FrequencyDropdown(
+            onSaved: (GoalFrequency? value) {
+              _formData[_timeOfDayKey] = value;
+            },
           ),
           _spacing,
           TimeOfDayDropdown(
