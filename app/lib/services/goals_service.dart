@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/domain/goal.dart';
-import 'package:goaly/services/GoalyCollections.dart';
+import 'package:goaly/services/goaly_gollections.dart';
 import 'package:goaly/services/authentication/google_authentication_service.dart';
 
 class GoalsService {
