@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goaly/providers/addable_goals_provider.dart';
 import 'package:goaly/ui/screens/add_goal/add_goal_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,11 +30,16 @@ class AddGoalScreen extends StatelessWidget {
               height: 20,
             ),
             Expanded(
-              child: ListView.separated(
-                itemBuilder: (_, __) => const AddGoalCard(),
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(height: 10),
-                itemCount: 1,
+              child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  final addableGoals = ref.watch(addableGoalsProvider);
+                  return ListView.separated(
+                    itemBuilder: (_, __) => const AddGoalCard(),
+                    separatorBuilder: (_, __) => child!,
+                    itemCount: addableGoals.length,
+                  );
+                },
+                child: const SizedBox(height: 10),
               ),
             )
           ],
