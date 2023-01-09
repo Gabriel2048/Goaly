@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
-import 'package:goaly/ui/screens/add_goal_details/new_goal_form.dart';
+import 'package:goaly/ui/screens/add_goal_details/add_goal_details_form.dart';
 
-class NewGoalScreen extends StatelessWidget {
+class AddGoalDetailsScreen extends StatelessWidget {
   final GoalDescription goalDescription;
 
-  const NewGoalScreen({Key? key, required this.goalDescription}) : super(key: key);
+  const AddGoalDetailsScreen({Key? key, required this.goalDescription})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class NewGoalScreen extends StatelessWidget {
       ),
       body: const Padding(
         padding: EdgeInsets.only(left: 35, right: 35, top: 35),
-        child: NewGoalForm(),
+        child: AddGoalDetailsForm(),
       ),
     );
   }

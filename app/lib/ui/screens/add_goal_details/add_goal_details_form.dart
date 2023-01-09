@@ -7,14 +7,14 @@ import 'package:goaly/services/goals_service.dart';
 import 'package:goaly/ui/screens/add_goal_details/frequency_dropdown.dart';
 import 'package:goaly/ui/screens/add_goal_details/time_of_day_dropdown.dart';
 
-class NewGoalForm extends StatefulWidget {
-  const NewGoalForm({Key? key}) : super(key: key);
+class AddGoalDetailsForm extends StatefulWidget {
+  const AddGoalDetailsForm({Key? key}) : super(key: key);
 
   @override
-  State<NewGoalForm> createState() => _NewGoalFormState();
+  State<AddGoalDetailsForm> createState() => _AddGoalDetailsFormState();
 }
 
-class _NewGoalFormState extends State<NewGoalForm> {
+class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
   final _formKey = GlobalKey<FormState>();
   static const _timeOfDayKey = 'timeOfDay';
   static const _titleKey = 'title';
