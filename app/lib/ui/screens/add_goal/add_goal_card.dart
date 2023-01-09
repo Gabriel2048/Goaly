@@ -28,10 +28,13 @@ class AddGoalCard extends StatelessWidget {
             Expanded(
               child: Align(
                 alignment: Alignment.center,
-                child: Text(
-                  goalDescription.description,
-                  style: GoogleFonts.chewy(
-                    textStyle: Theme.of(context).textTheme.headlineSmall,
+                child: Hero(
+                  tag: goalDescription.description,
+                  child: Text(
+                    goalDescription.description,
+                    style: GoogleFonts.chewy(
+                      textStyle: Theme.of(context).textTheme.headlineSmall,
+                    ),
                   ),
                 ),
               ),
@@ -43,7 +46,8 @@ class AddGoalCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => AddGoalDetailsScreen(goalDescription: goalDescription),
+            builder: (_) =>
+                AddGoalDetailsScreen(goalDescription: goalDescription),
           ),
         );
       },

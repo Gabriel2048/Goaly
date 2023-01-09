@@ -8,7 +8,10 @@ import 'package:goaly/ui/screens/add_goal_details/frequency_dropdown.dart';
 import 'package:goaly/ui/screens/add_goal_details/time_of_day_dropdown.dart';
 
 class AddGoalDetailsForm extends StatefulWidget {
-  const AddGoalDetailsForm({Key? key}) : super(key: key);
+  final bool isTitleConfigurable;
+
+  const AddGoalDetailsForm({Key? key, required this.isTitleConfigurable})
+      : super(key: key);
 
   @override
   State<AddGoalDetailsForm> createState() => _AddGoalDetailsFormState();
@@ -20,39 +23,39 @@ class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
   static const _titleKey = 'title';
   static const _descriptionKey = 'description';
 
-  final _spacing = const SizedBox(height: 40);
-
   final _formData = {};
 
   @override
   Widget build(BuildContext context) {
+    const spacing = SizedBox(height: 40);
+
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          TextFormField(
-            initialValue: 'Gym',
-            onSaved: (String? value) {
-              _formData[_titleKey] = value;
-            },
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Title (required)',
+          if (widget.isTitleConfigurable)
+            TextFormField(
+              onSaved: (String? value) {
+                _formData[_titleKey] = value;
+              },
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Title (required)',
+              ),
             ),
-          ),
-          _spacing,
+          if (widget.isTitleConfigurable) spacing,
           FrequencyDropdown(
             onSaved: (GoalFrequency? value) {
               _formData[_timeOfDayKey] = value;
             },
           ),
-          _spacing,
+          spacing,
           TimeOfDayDropdown(
             onSaved: (GoalTimeOfDay? value) {
               _formData[_timeOfDayKey] = value;
             },
           ),
-          _spacing,
+          spacing,
           TextFormField(
             onSaved: (String? value) {
               _formData[_descriptionKey] = value;
@@ -62,7 +65,7 @@ class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
               labelText: 'Description (optional)',
             ),
           ),
-          _spacing,
+          spacing,
           Consumer(
             builder: (_, ref, __) => ElevatedButton.icon(
               onPressed: () {

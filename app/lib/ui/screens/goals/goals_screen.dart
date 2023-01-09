@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
 import 'package:goaly/ui/screens/goals/existing_goals_list.dart';
 import 'package:goaly/ui/widgets/app_drawer.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GoalsScreen extends StatefulWidget {
   const GoalsScreen({Key? key}) : super(key: key);
@@ -15,7 +16,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Goaly'),
+        title: Text(
+          'Goaly',
+          style: GoogleFonts.chewy(
+            textStyle: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
       ),
       drawer: const AppDrawer(),
       body: const Padding(
@@ -23,8 +29,13 @@ class _GoalsScreenState extends State<GoalsScreen> {
         child: ExistingGoalsList(),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        label: const Text('Add Goal'),
-        icon: const Icon(Icons.add),
+        label: Text(
+          'Add Goal',
+          style: GoogleFonts.chewy(
+            textStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black),
+          ),
+        ),
+        icon: const Icon(Icons.add, size: 40.0),
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (_) => const AddGoalScreen()));

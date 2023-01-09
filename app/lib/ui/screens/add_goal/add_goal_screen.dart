@@ -11,7 +11,12 @@ class AddGoalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add goal'),
+        title: Text(
+          'Add goal',
+          style: GoogleFonts.chewy(
+            textStyle: Theme.of(context).textTheme.headlineSmall,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20),
@@ -30,8 +35,7 @@ class AddGoalScreen extends StatelessWidget {
             Expanded(
               child: Consumer(
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                  final goalDescription = ref
-                      .watch(goalDescriptionProvider);
+                  final goalDescription = ref.watch(goalDescriptionProvider);
                   return ListView.separated(
                     itemBuilder: (_, int index) => AddGoalCard(
                       goalDescription: goalDescription[index],
