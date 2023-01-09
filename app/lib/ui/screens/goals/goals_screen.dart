@@ -28,7 +28,8 @@ class _GoalsScreenState extends State<GoalsScreen> {
         label: const Text('Add Goal'),
         icon: const Icon(Icons.add),
         onPressed: () {
-          Navigator.pushNamed(context, AddGoalScreen.route);
+          Navigator.push(context,
+              MaterialPageRoute(builder: (_) => const AddGoalScreen()));
         },
       ),
     );

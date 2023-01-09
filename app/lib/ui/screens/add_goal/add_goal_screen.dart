@@ -5,8 +5,6 @@ import 'package:goaly/ui/screens/add_goal/add_goal_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddGoalScreen extends StatelessWidget {
-  static const String route = "AddGoalScreen";
-
   const AddGoalScreen({Key? key}) : super(key: key);
 
   @override
@@ -33,9 +31,7 @@ class AddGoalScreen extends StatelessWidget {
               child: Consumer(
                 builder: (BuildContext context, WidgetRef ref, Widget? child) {
                   final goalDescription = ref
-                      .watch(goalDescriptionProvider)
-                      .values
-                      .toList(growable: false);
+                      .watch(goalDescriptionProvider);
                   return ListView.separated(
                     itemBuilder: (_, int index) => AddGoalCard(
                       goalDescription: goalDescription[index],

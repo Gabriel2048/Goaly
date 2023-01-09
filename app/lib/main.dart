@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:goaly/firebase_options.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
-import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -47,7 +46,6 @@ class MyApp extends ConsumerWidget {
         GoalsScreen.route: (_) => const GoalsScreen(),
         AuthScreen.route: (_) => const AuthScreen(),
         NewGoalScreen.route: (_) => const NewGoalScreen(),
-        AddGoalScreen.route: (_) => const AddGoalScreen(),
       },
       // home: const LandingScreen(),
     );
