@@ -35,7 +35,8 @@ class AppDrawer extends ConsumerWidget {
               onTap: () async {
                 final navigator = Navigator.of(context);
                 await authService.logOut();
-                navigator.pushReplacementNamed(AuthScreen.route);
+                navigator.pushReplacement(
+                    MaterialPageRoute(builder: (_) => const AuthScreen()));
               },
             ),
           ],

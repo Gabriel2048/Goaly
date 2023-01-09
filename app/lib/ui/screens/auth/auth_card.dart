@@ -55,13 +55,17 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             child: Consumer(
               builder: (_, WidgetRef ref, __) {
                 return ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(fixedSize: const Size(230, 60)),
+                  style:
+                      ElevatedButton.styleFrom(fixedSize: const Size(230, 60)),
                   onPressed: () async {
-                    final authService = ref.watch(authenticationServiceProvider);
+                    final authService =
+                        ref.watch(authenticationServiceProvider);
                     final navigator = Navigator.of(context);
                     final credentials = await authService.startGoogleAuth();
                     if (credentials != null) {
-                      navigator.pushReplacementNamed(GoalsScreen.route);
+                      navigator.pushReplacement(
+                        MaterialPageRoute(builder: (_) => const GoalsScreen()),
+                      );
                     }
                   },
                   icon: const Icon(FontAwesomeIcons.google),

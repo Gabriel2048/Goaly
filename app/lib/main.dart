@@ -40,11 +40,7 @@ class MyApp extends ConsumerWidget {
         colorScheme: const ColorScheme.dark(),
         useMaterial3: true,
       ),
-      initialRoute: authService.isLoggedIn ? GoalsScreen.route : AuthScreen.route,
-      routes: {
-        GoalsScreen.route: (_) => const GoalsScreen(),
-        AuthScreen.route: (_) => const AuthScreen(),
-      },
+      home: authService.isLoggedIn ? const GoalsScreen() : const AuthScreen(),
       // home: const LandingScreen(),
     );
   }

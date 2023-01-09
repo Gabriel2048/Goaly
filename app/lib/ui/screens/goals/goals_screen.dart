@@ -4,8 +4,6 @@ import 'package:goaly/ui/screens/goals/existing_goals_list.dart';
 import 'package:goaly/ui/widgets/app_drawer.dart';
 
 class GoalsScreen extends StatefulWidget {
-  static const String route = "LoggedScreen";
-
   const GoalsScreen({Key? key}) : super(key: key);
 
   @override

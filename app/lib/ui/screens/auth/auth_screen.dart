@@ -4,8 +4,6 @@ import 'package:goaly/ui/screens/auth/auth_card.dart';
 import 'package:goaly/ui/widgets/infrastructure/fading_slide_transition.dart';
 
 class AuthScreen extends StatelessWidget {
-  static const String route = "AuthScreen";
-
   const AuthScreen({Key? key}) : super(key: key);
 
   @override
