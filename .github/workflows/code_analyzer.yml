@@ -21,11 +21,12 @@ jobs:
     - uses: subosito/flutter-action@v2
       with:
         channel: 'stable'
-        cache: true
-        cache-key: 'flutter-:os:-:channel:-:version:-:arch:-:hash:'
-        cache-path: ${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch
+    - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
 
     - run: flutter pub get
       working-directory: app
-    - run: flutter analyze --fatal-warnings
+    - name: Run Dart Analyzer
+      run: dart analyze --fatal-warnings
+    - name: Run Flutter Analyzer
+      run: flutter analyze --fatal-warnings
       working-directory: app
