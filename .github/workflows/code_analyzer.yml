@@ -12,9 +12,6 @@ on:
 jobs:
   analyze_code:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: app
 
     steps:
     - uses: actions/checkout@v3
@@ -26,4 +23,6 @@ jobs:
         cache-path: ${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch
 
     - run: flutter pub get
+      working-directory: app
     - run: flutter analyze --fatal-warnings
+      working-directory: app
