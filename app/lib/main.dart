@@ -8,7 +8,6 @@ import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:goaly/ui/screens/new_goal/new_goal_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,7 +44,6 @@ class MyApp extends ConsumerWidget {
       routes: {
         GoalsScreen.route: (_) => const GoalsScreen(),
         AuthScreen.route: (_) => const AuthScreen(),
-        NewGoalScreen.route: (_) => const NewGoalScreen(),
       },
       // home: const LandingScreen(),
     );

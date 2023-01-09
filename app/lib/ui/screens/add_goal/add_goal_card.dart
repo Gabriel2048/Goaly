@@ -40,7 +40,8 @@ class AddGoalCard extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.pushNamed(context, NewGoalScreen.route);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (_) => const NewGoalScreen()));
       },
     );
   }

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:goaly/ui/screens/new_goal/new_goal_form.dart';
 
 class NewGoalScreen extends StatelessWidget {
-  static const String route = "NewGoalScreen";
-
   const NewGoalScreen({Key? key}) : super(key: key);
 
   @override
