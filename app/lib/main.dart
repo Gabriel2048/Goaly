@@ -16,7 +16,7 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
+    options: await DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseFunctions.instance.useFunctionsEmulator("192.168.0.106", 5001);
   FirebaseAuth.instance.useAuthEmulator("192.168.0.106", 9099);
