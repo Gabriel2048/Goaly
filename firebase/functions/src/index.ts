@@ -1,8 +1,8 @@
 import * as functions from "firebase-functions";
-import { calendar } from "@googleapis/calendar";
 import { GoogleOauthClientFactory } from "./services/googleOauthClientFactory";
 import * as admin from 'firebase-admin'
 import { GoalyCollections } from "./goaly_collections";
+import { GoogleCalendarService } from "./services/googleCalendarService";
 admin.initializeApp()
 
 type AddGoalRequest = {
@@ -12,9 +12,9 @@ type AddGoalRequest = {
 
 export const addGoal = functions.https.onCall(async (request: AddGoalRequest, _context) => {
   const auth = GoogleOauthClientFactory.createFromToken(request.googleAccessToken);
+  const calendarService = new GoogleCalendarService(auth);
 
-  const calendarClient = calendar("v3");
-  const event = await calendarClient.events.insert({
+  const event = await calendarService.addEvent({
     calendarId: "primary",
     auth,
     requestBody: {
