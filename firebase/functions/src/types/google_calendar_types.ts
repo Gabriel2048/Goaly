@@ -3,4 +3,4 @@ import { GaxiosResponse } from "googleapis-common";
 
 export type AddedEvent = GaxiosResponse<calendar_v3.Schema$Event>;
 
-export type EventToAdd = calendar_v3.Params$Resource$Events$Insert;
+export type EventToAdd = calendar_v3.Schema$Event;

@@ -1,6 +1,6 @@
 import * as functions from "firebase-functions";
-import { GoogleOauthClientFactory } from "./services/googleOauthClientFactory";
 import * as admin from 'firebase-admin'
+import { GoogleOauthClientFactory } from "./services/googleOauthClientFactory";
 import { GoalyCollections } from "./goaly_collections";
 import { GoogleCalendarService } from "./services/googleCalendarService";
 admin.initializeApp()
@@ -15,18 +15,14 @@ export const addGoal = functions.https.onCall(async (request: AddGoalRequest, _c
   const calendarService = new GoogleCalendarService(auth);
 
   const event = await calendarService.addEvent({
-    calendarId: "primary",
-    auth,
-    requestBody: {
-      summary: "[Goaly] My event",
-      start: {
-        dateTime: "2022-12-29T09:00:00",
-        timeZone: "America/New_York",
-      },
-      end: {
-        dateTime: "2022-12-29T10:00:00",
-        timeZone: "America/New_York",
-      },
+    summary: "[Goaly] My event",
+    start: {
+      dateTime: "2022-12-29T09:00:00",
+      timeZone: "America/New_York",
+    },
+    end: {
+      dateTime: "2022-12-29T10:00:00",
+      timeZone: "America/New_York",
     },
   });
 
