@@ -7,9 +7,9 @@ final goalDescriptionProvider =
     Provider<UnmodifiableListView<GoalDescription>>((ref) {
   return UnmodifiableListView(const [
     GoalDescription(
-        'assets/goals/icons/gym.png', 'Go to the gym', GoalType.gym),
+        'assets/goals/icons/gym.png', 'Go to the gym 2', GoalType.gym),
     GoalDescription(
-        'assets/goals/icons/gym.png', 'Custom goal', GoalType.custom)
+        'assets/goals/icons/board.png', 'Custom goal', GoalType.custom)
   ]);
 });
 
