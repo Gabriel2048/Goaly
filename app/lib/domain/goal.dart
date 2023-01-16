@@ -1,16 +1,22 @@
+import 'package:goaly/domain/goal_frequency.dart';
 import 'package:goaly/domain/goal_time_of_day.dart';
 
 class Goal {
-  final GoalTimeOfDay goalTimeOfDay;
-  final String title;
+  final GoalTimeOfDay timeOfDay;
+  final GoalFrequency frequency;
+  final String? title;
   final String? description;
 
   const Goal(
-      {required this.goalTimeOfDay, required this.title, this.description});
+      {required this.timeOfDay,
+      required this.frequency,
+      required this.title,
+      this.description});
 
-  Map<String, String> toMap() {
+  Map<String, String?> toMap() {
     return {
-      'goalTimeOfDay': goalTimeOfDay.name,
+      'timeOfDay': timeOfDay.name,
+      'frequency': frequency.name,
       'title': title,
       'description': description.toString(),
     };
@@ -18,7 +24,8 @@ class Goal {
 
   factory Goal.fromMap(Map<String, dynamic> map) {
     return Goal(
-      goalTimeOfDay: GoalTimeOfDay.values.byName(map['goalTimeOfDay']),
+      timeOfDay: GoalTimeOfDay.values.byName(map['timeOfDay']),
+      frequency: GoalFrequency.values.byName(map['frequency']),
       title: map['title'],
       description: map['description'],
     );

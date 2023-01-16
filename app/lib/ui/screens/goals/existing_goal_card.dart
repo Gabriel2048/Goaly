@@ -18,7 +18,8 @@ class ExistingGoalCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            goal.title,
+            // todo
+            goal.title ?? 'todo',
             style: GoogleFonts.chewy(
               textStyle: Theme.of(context).textTheme.headlineSmall,
             ),
@@ -26,7 +27,7 @@ class ExistingGoalCard extends StatelessWidget {
           Row(
             children: [
               Text(
-                goal.goalTimeOfDay.name,
+                goal.timeOfDay.name,
                 style: GoogleFonts.chewy(
                   textStyle: Theme.of(context).textTheme.headlineSmall,
                 ),

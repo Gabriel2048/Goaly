@@ -20,6 +20,7 @@ class AddGoalDetailsForm extends StatefulWidget {
 class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
   final _formKey = GlobalKey<FormState>();
   static const _timeOfDayKey = 'timeOfDay';
+  static const _frequencyKey = 'frequency';
   static const _titleKey = 'title';
   static const _descriptionKey = 'description';
 
@@ -46,7 +47,7 @@ class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
           if (widget.isTitleConfigurable) spacing,
           FrequencyDropdown(
             onSaved: (GoalFrequency? value) {
-              _formData[_timeOfDayKey] = value;
+              _formData[_frequencyKey] = value;
             },
           ),
           spacing,
@@ -74,8 +75,9 @@ class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
                 if (_formKey.currentState?.validate() ?? false) {
                   _formKey.currentState?.save();
                   goalsService.addGoal(Goal(
-                    goalTimeOfDay: _formData[_timeOfDayKey],
-                    title: _formData[_titleKey],
+                    timeOfDay: _formData[_timeOfDayKey],
+                    frequency: _formData[_frequencyKey],
+                    title: widget.isTitleConfigurable ? _formData[_titleKey] : null,
                     description: _formData[_descriptionKey],
                   ));
                 }
