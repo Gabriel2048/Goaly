@@ -21,7 +21,7 @@ class GoogleAuthenticationService {
   }
 
   Future<void> logOut() async {
-    await _googleSignIn.disconnect();
+    await _googleSignIn.signOut();
   }
 
   Future<bool> get isLoggedIn => _googleSignIn.isSignedIn();
