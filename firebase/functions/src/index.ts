@@ -7,7 +7,21 @@ admin.initializeApp()
 
 type AddGoalRequest = {
   googleAccessToken: string;
-  goal: object
+  goal: goal
+}
+type goal = {
+  timeOfDay: string;
+  frequency: GoalFrequency;
+  title?: string;
+  description?: string;
+};
+
+enum GoalFrequency {
+  daily = 'daily',
+  threeTimesPerWeek = 'threeTimesPerWeek',
+  twicePerWeek = 'twicePerWeek',
+  weekly = 'weekly',
+  monthly = 'monthly',
 }
 
 export const addGoal = functions.https.onCall(async (request: AddGoalRequest, _context) => {
