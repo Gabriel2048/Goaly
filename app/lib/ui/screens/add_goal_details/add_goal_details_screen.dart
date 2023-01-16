@@ -22,24 +22,27 @@ class AddGoalDetailsScreen extends StatelessWidget {
         ),
         automaticallyImplyLeading: false,
       ),
-      body: Column(
-        children: [
-          Hero(
-            tag: goalDescription.description,
-            child: Text(
-              goalDescription.description,
-              style: GoogleFonts.chewy(
-                textStyle: Theme.of(context).textTheme.headlineSmall,
+      body: Padding(
+        padding: const EdgeInsets.only(top: 30),
+        child: Column(
+          children: [
+            Hero(
+              tag: goalDescription.description,
+              child: Text(
+                goalDescription.description,
+                style: GoogleFonts.chewy(
+                  textStyle: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 35, right: 35, top: 35),
-            child: AddGoalDetailsForm(
-              isTitleConfigurable: goalDescription.goalType == GoalType.custom,
+            Padding(
+              padding: const EdgeInsets.only(left: 35, right: 35, top: 35),
+              child: AddGoalDetailsForm(
+                isTitleConfigurable: goalDescription.goalType == GoalType.custom,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
