@@ -18,13 +18,10 @@ class AddGoalCard extends StatelessWidget {
     return TappableCard(
       height: height,
       child: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: Row(
           children: [
-            Image.asset(
-              goalDescription.assetPath,
-              height: height / 1.5,
-            ),
+            Image.asset(goalDescription.assetPath),
             Expanded(
               child: Align(
                 alignment: Alignment.center,
