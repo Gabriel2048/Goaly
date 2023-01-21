@@ -1,5 +1,5 @@
-import { calendar_v3 } from "@googleapis/calendar";
-import { GaxiosResponse } from "googleapis-common";
+import {calendar_v3} from "@googleapis/calendar";
+import {GaxiosResponse} from "googleapis-common";
 
 export type AddedEvent = GaxiosResponse<calendar_v3.Schema$Event>;
 
