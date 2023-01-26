@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const scopes = [
   "https://www.googleapis.com/auth/calendar.events",
+  'https://www.googleapis.com/auth/calendar.readonly'
 ];
 
 class GoogleAuthenticationService {
