@@ -1,8 +1,11 @@
 import * as functions from "firebase-functions";
-import {GoalyCollections} from "../../goaly_collections";
-import {GoogleCalendarService} from "../../services/googleCalendarService";
-import {GoogleOauthClientFactory} from "../../services/googleOauthClientFactory";
-import {GoalFrequency} from "../../types/goalFrequency";
+import { GoalyCollections } from "../../goaly_collections";
+import { GoogleCalendarService } from "../../services/googleCalendarService";
+import { GoogleOauthClientFactory } from "../../services/googleOauthClientFactory";
+import { GoalFrequency } from "../../types/goalFrequency";
+import { buildRecurrence } from "../../services/buildRecurence";
+import { GoalTimeOfDay } from "../../types/goalTymeOfDay";
+import { GoalType } from "../../types/goalType";
 
 type AddGoalRequest = {
     googleAccessToken: string;
@@ -10,33 +13,44 @@ type AddGoalRequest = {
 }
 
 type Goal = {
-    timeOfDay: string;
+    timeOfDay: GoalTimeOfDay;
     frequency: GoalFrequency;
     title?: string;
-    description?: string;
+    goalType: GoalType;
 };
 
 export const addGoalEdnpoint = async (request: AddGoalRequest, context: functions.https.CallableContext) => {
-  const auth = GoogleOauthClientFactory.createFromToken(request.googleAccessToken);
-  const calendarService = new GoogleCalendarService(auth);
+    const auth = GoogleOauthClientFactory.createFromToken(request.googleAccessToken);
+    const calendarService = new GoogleCalendarService(auth);
 
-  const event = await calendarService.addEvent({
-    summary: "[Goaly] My event",
-    start: {
-      dateTime: "2023-01-16T09:00:00",
-      timeZone: "America/New_York",
-    },
-    end: {
-      dateTime: "2023-01-16T10:00:00",
-      timeZone: "America/New_York",
-    },
-    recurrence: ["RRULE:FREQ=DAILY"],
-  });
+    const userIanaTimeZone = await calendarService.getUsersIanaTimezone();
 
-  await GoalyCollections.goalsOfUser(context.auth!.uid).add({
-    ...request.goal,
-    "eventId": event.data.id,
-  });
+    const recurrence = buildRecurrence(request.goal.frequency, request.goal.timeOfDay);
+    const nextMonday = getNextMonday();
+    
+    const event = await calendarService.addEvent({
+        summary: "[Goaly] My event",
+        start: {
+            dateTime: nextMonday.toISOString(),
+            timeZone: userIanaTimeZone,
+        },
+        end: {
+            dateTime: nextMonday.toISOString(),
+            timeZone: userIanaTimeZone,
+        },
+        recurrence,
+    });
 
-  return {message: "", code: 200};
+    await GoalyCollections.goalsOfUser(context.auth!.uid).add({
+        ...request.goal,
+        "eventId": event.data.id,
+    });
+
+    return { message: "", code: 200 };
+};
+
+const getNextMonday = (): Date => {
+    var next = new Date();
+    next.setDate(next.getDate() - next.getDay() + 8);
+    return next;
 };

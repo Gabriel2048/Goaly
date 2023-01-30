@@ -1,4 +1,4 @@
-export const enum GoalTimeOfDay {
+export enum GoalTimeOfDay {
     morning = 'morning',
     midday = 'midday',
     evening = 'evening',

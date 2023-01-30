@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:goaly/domain/goal_type.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/ui/screens/add_goal_details/add_goal_details_form.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,7 +37,7 @@ class AddGoalDetailsScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 35, right: 35, top: 35),
               child: AddGoalDetailsForm(
-                isTitleConfigurable: goalDescription.goalType == GoalType.custom,
+                goalType: goalDescription.goalType,
               ),
             ),
           ],
