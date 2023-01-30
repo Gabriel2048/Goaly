@@ -43,7 +43,6 @@ class MyApp extends ConsumerWidget {
           useMaterial3: true,
         ),
         home: authService.isLoggedIn ? const GoalsScreen() : const AuthScreen(),
-        // home: const LandingScreen(),
       ),
     );
   }
