@@ -1,4 +1,5 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -33,15 +34,17 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authService = ref.watch(authenticationServiceProvider);
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Goaly',
-      theme: ThemeData.from(
-        colorScheme: const ColorScheme.dark(),
-        useMaterial3: true,
+    return DynamicColorBuilder(
+      builder: (_, ColorScheme? dark) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Goaly',
+        theme: ThemeData.from(
+          colorScheme: dark ?? const ColorScheme.dark(),
+          useMaterial3: true,
+        ),
+        home: authService.isLoggedIn ? const GoalsScreen() : const AuthScreen(),
+        // home: const LandingScreen(),
       ),
-      home: authService.isLoggedIn ? const GoalsScreen() : const AuthScreen(),
-      // home: const LandingScreen(),
     );
   }
 }
