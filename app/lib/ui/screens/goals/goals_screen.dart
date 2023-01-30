@@ -32,10 +32,10 @@ class _GoalsScreenState extends State<GoalsScreen> {
         label: Text(
           'Add Goal',
           style: GoogleFonts.chewy(
-            textStyle: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Colors.black),
+            textStyle: Theme.of(context).textTheme.headlineSmall!,
           ),
         ),
-        icon: const Icon(Icons.add, size: 40.0),
+        icon: const Icon(Icons.add, color: Colors.white,),
         onPressed: () {
           Navigator.push(context,
               MaterialPageRoute(builder: (_) => const AddGoalScreen()));
