@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TappableCard extends StatelessWidget {
   final Widget child;
-  final double height;
+  final double? height;
   final double? width;
   final void Function()? onTap;
   final borderRadius = 12.0;
@@ -10,7 +10,7 @@ class TappableCard extends StatelessWidget {
   const TappableCard({
     required this.child,
     this.onTap,
-    required this.height,
+    this.height,
     this.width,
     Key? key,
   }) : super(key: key);

@@ -14,7 +14,7 @@ class ExistingGoalsList extends StatelessWidget {
         return goalsStream.when(
           data: (data) => ListView.separated(
             itemCount: data.length,
-            itemBuilder: (BuildContext context, int index) {
+            itemBuilder: (_, int index) {
               return ExistingGoalCard(goal: data[index]);
             },
             separatorBuilder: (_, __) => const SizedBox(height: 10),
