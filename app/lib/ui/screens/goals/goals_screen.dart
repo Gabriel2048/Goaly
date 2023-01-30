@@ -35,10 +35,12 @@ class _GoalsScreenState extends State<GoalsScreen> {
             textStyle: Theme.of(context).textTheme.headlineSmall!,
           ),
         ),
-        icon: const Icon(Icons.add, color: Colors.white,),
+        icon: const Icon(Icons.add, color: Colors.white),
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (_) => const AddGoalScreen()));
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const AddGoalScreen()),
+          );
         },
       ),
     );
