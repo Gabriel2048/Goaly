@@ -46,7 +46,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
               AnimatedContainer(
                 height: isExpanded ? 0 : 100,
                 duration: const Duration(milliseconds: 350),
-                child: Text("more"),
+                child: const Text("more"),
               )
             ],
           );
