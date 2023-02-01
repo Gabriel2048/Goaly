@@ -20,8 +20,12 @@ type Goal = {
 };
 
 export const addGoalEdnpoint = async (request: AddGoalRequest, context: functions.https.CallableContext) => {
-    const auth = GoogleOauthClientFactory.createFromToken(request.googleAccessToken);
-    const calendarService = new GoogleCalendarService(auth);
+  if (!context.auth) {
+    return;
+  }
+
+  const auth = GoogleOauthClientFactory.createFromToken(request.googleAccessToken);
+  const calendarService = new GoogleCalendarService(auth);
 
     const userIanaTimeZone = await calendarService.getUsersIanaTimezone();
 
@@ -41,16 +45,16 @@ export const addGoalEdnpoint = async (request: AddGoalRequest, context: function
         recurrence,
     });
 
-    await GoalyCollections.goalsOfUser(context.auth!.uid).add({
-        ...request.goal,
-        "eventId": event.data.id,
-    });
+  await GoalyCollections.goalsOfUser(context.auth.uid).add({
+    ...request.goal,
+    "eventId": event.data.id,
+  });
 
     return { message: "", code: 200 };
 };
 
 const getNextMonday = (): Date => {
-    var next = new Date();
-    next.setDate(next.getDate() - next.getDay() + 8);
-    return next;
+  const next = new Date();
+  next.setDate(next.getDate() - next.getDay() + 8);
+  return next;
 };
