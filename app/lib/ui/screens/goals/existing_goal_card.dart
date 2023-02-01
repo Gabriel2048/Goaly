@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/domain/goal.dart';
+import 'package:goaly/main.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/ui/screens/add_goal_details/frequency_dropdown.dart';
 import 'package:goaly/ui/widgets/infrastructure/tappable_card.dart';
@@ -15,9 +16,32 @@ class ExistingGoalCard extends StatefulWidget {
   State<ExistingGoalCard> createState() => _ExistingGoalCardState();
 }
 
-class _ExistingGoalCardState extends State<ExistingGoalCard> {
+class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
   bool isExpanded = false;
   static const padding = 18.0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) {
+        routeObserver.subscribe(this, ModalRoute.of(context)! as PageRoute);
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    super.dispose();
+  }
+
+  @override
+  void didPushNext() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
