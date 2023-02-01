@@ -28,6 +28,8 @@ Future<void> main() async {
   );
 }
 
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
@@ -38,6 +40,7 @@ class MyApp extends ConsumerWidget {
       builder: (_, ColorScheme? dark) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Goaly',
+        navigatorObservers: [routeObserver],
         theme: ThemeData.from(
           colorScheme: dark ?? const ColorScheme.dark(),
           useMaterial3: true,
