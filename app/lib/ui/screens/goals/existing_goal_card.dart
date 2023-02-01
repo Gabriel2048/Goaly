@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/domain/goal.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/ui/widgets/infrastructure/tappable_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ExistingGoalCard extends StatefulWidget {
   final Goal goal;
@@ -34,7 +35,15 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(goal.description),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      goal.description,
+                      style: GoogleFonts.chewy(
+                        textStyle: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                  ),
                   Image.asset(
                     goal.assetPath,
                     color: Colors.white.withOpacity(0.3),
