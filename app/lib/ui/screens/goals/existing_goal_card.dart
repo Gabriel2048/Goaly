@@ -33,7 +33,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
         child: Consumer(
           builder: (_, WidgetRef ref, Widget? child) {
             final goalsDescriptions = ref.watch(goalDescriptionProvider);
-            final goal = goalsDescriptions.singleWhere(
+            final goalDescription = goalsDescriptions.singleWhere(
                 (element) => element.goalType == widget.goal.goalType);
             return Wrap(
               runAlignment: WrapAlignment.spaceEvenly,
@@ -45,13 +45,13 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        goal.description,
+                        goalDescription.description,
                         style: GoogleFonts.chewy(
                           textStyle: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ),
                       Image.asset(
-                        goal.assetPath,
+                        goalDescription.assetPath,
                         color: Colors.white.withOpacity(0.3),
                         colorBlendMode: BlendMode.modulate,
                         height: 100,
