@@ -17,6 +17,7 @@ class ExistingGoalCard extends StatefulWidget {
 
 class _ExistingGoalCardState extends State<ExistingGoalCard> {
   bool isExpanded = false;
+  static const padding = 18.0;
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +30,18 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         height: isExpanded ? 200 : 100,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 18.0),
-          child: Consumer(
-            builder: (_, WidgetRef ref, Widget? child) {
-              final goalsDescriptions = ref.watch(goalDescriptionProvider);
-              final goal = goalsDescriptions.singleWhere(
-                  (element) => element.goalType == widget.goal.goalType);
-              return Wrap(
-                clipBehavior: Clip.antiAlias,
-                children: [
-                  Row(
+        child: Consumer(
+          builder: (_, WidgetRef ref, Widget? child) {
+            final goalsDescriptions = ref.watch(goalDescriptionProvider);
+            final goal = goalsDescriptions.singleWhere(
+                (element) => element.goalType == widget.goal.goalType);
+            return Wrap(
+              runAlignment: WrapAlignment.spaceEvenly,
+              clipBehavior: Clip.antiAlias,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: padding),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -56,16 +58,35 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
                       ),
                     ],
                   ),
-                  Text(
-                    frequencyToLabelMap[widget.goal.frequency]!,
-                    style: GoogleFonts.chewy(
-                      textStyle: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Divider(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: padding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        frequencyToLabelMap[widget.goal.frequency]!,
+                        style: GoogleFonts.chewy(
+                          textStyle: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          child: const Text('Check progress'),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
