@@ -19,7 +19,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
         title: Text(
           'Goaly',
           style: GoogleFonts.chewy(
-            textStyle: Theme.of(context).textTheme.headlineSmall,
+            textStyle: Theme.of(context).textTheme.headlineLarge,
           ),
         ),
       ),
