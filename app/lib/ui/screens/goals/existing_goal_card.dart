@@ -30,18 +30,18 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
         height: isExpanded ? 200 : 100,
-        child: Consumer(
-          builder: (_, WidgetRef ref, Widget? child) {
-            final goalsDescriptions = ref.watch(goalDescriptionProvider);
-            final goalDescription = goalsDescriptions.singleWhere(
-                (element) => element.goalType == widget.goal.goalType);
-            return Wrap(
-              runAlignment: WrapAlignment.spaceEvenly,
-              clipBehavior: Clip.antiAlias,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: padding),
-                  child: Row(
+        child: Wrap(
+          runAlignment: WrapAlignment.spaceEvenly,
+          clipBehavior: Clip.antiAlias,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: padding),
+              child: Consumer(
+                builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                  final goalsDescriptions = ref.watch(goalDescriptionProvider);
+                  final goalDescription = goalsDescriptions.singleWhere(
+                      (element) => element.goalType == widget.goal.goalType);
+                  return Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -57,36 +57,36 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> {
                         height: 100,
                       ),
                     ],
+                  );
+                },
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 18.0),
+              child: Divider(),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: padding),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    frequencyToLabelMap[widget.goal.frequency]!,
+                    style: GoogleFonts.chewy(
+                      textStyle: Theme.of(context).textTheme.bodyLarge,
+                    ),
                   ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 18.0),
-                  child: Divider(),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: padding),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        frequencyToLabelMap[widget.goal.frequency]!,
-                        style: GoogleFonts.chewy(
-                          textStyle: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10.0),
-                        child: OutlinedButton(
-                          onPressed: () {},
-                          child: const Text('Check progress'),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10.0),
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: const Text('Check progress'),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
