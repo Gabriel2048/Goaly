@@ -7,19 +7,33 @@ class CalendarService {
 
   CalendarService(this._googleAuthService);
 
-  Future<String> getUsersTimeZone() async {
+  Future<String> _getUsersTimeZone() async {
     final calendar = await _runWithCalendarClient(
       (calendarClient) => calendarClient.calendars.get('primary'),
     );
     return calendar.timeZone!;
   }
 
-  Future<void> addEvent(EventDateTime start, EventDateTime end) async {
+  Future<void> addEvent(
+    DateTime start,
+    DateTime end,
+    List<String>? recurrence,
+  ) async {
+    final timeZone = await _getUsersTimeZone();
+
     final eventToAdd = Event(
       summary: '[Goaly] My event',
-      start: start,
-      end: end,
+      start: EventDateTime(
+        dateTime: start,
+        timeZone: timeZone,
+      ),
+      end: EventDateTime(
+        dateTime: end,
+        timeZone: timeZone,
+      ),
+      recurrence: recurrence,
     );
+
     await _runWithCalendarClient(
       (calendarClient) => calendarClient.events.insert(eventToAdd, 'primary'),
     );
