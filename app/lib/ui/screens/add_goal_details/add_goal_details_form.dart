@@ -4,7 +4,7 @@ import 'package:goaly/domain/goal.dart';
 import 'package:goaly/domain/goal_frequency.dart';
 import 'package:goaly/domain/goal_time_of_day.dart';
 import 'package:goaly/domain/goal_type.dart';
-import 'package:goaly/services/goals_service.dart';
+import 'package:goaly/services/goals/goals_service.dart';
 import 'package:goaly/ui/screens/add_goal_details/frequency_dropdown.dart';
 import 'package:goaly/ui/screens/add_goal_details/time_of_day_dropdown.dart';
 
