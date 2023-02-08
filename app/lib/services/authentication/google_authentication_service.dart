@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:googleapis_auth/googleapis_auth.dart';
+import 'package:http/http.dart' as http;
 
 const calendarScopes = [
   "https://www.googleapis.com/auth/calendar.events",
@@ -46,6 +48,22 @@ class GoogleAuthenticationService {
       return _googleSignIn.signInSilently();
     }
     return Future.value();
+  }
+
+  Future<AuthClient> createAuthenticatedClient() async {
+    final userAuth = await getAuthentication();
+
+    final AccessCredentials credentials = AccessCredentials(
+      AccessToken(
+        'Bearer',
+        userAuth.accessToken!,
+        DateTime.now().toUtc().add(const Duration(hours: 1)),
+      ),
+      null,
+      calendarScopes,
+    );
+
+    return authenticatedClient(http.Client(), credentials);
   }
 }
 
