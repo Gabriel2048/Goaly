@@ -26,7 +26,7 @@ class AddGoalCard extends StatelessWidget {
               child: Align(
                 alignment: Alignment.center,
                 child: Hero(
-                  tag: goalDescription.description,
+                  tag: goalDescription.goalType,
                   child: Text(
                     goalDescription.description,
                     style: GoogleFonts.chewy(

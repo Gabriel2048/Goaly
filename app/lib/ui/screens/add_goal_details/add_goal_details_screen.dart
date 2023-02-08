@@ -26,7 +26,7 @@ class AddGoalDetailsScreen extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: goalDescription.description,
+              tag: goalDescription.goalType,
               child: Text(
                 goalDescription.description,
                 style: GoogleFonts.chewy(
