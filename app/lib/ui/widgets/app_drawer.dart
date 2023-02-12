@@ -12,8 +12,10 @@ class AppDrawer extends ConsumerWidget {
     final user = authService.currentUser;
 
     return NavigationDrawer(
+      selectedIndex: 1,
       children: [
         DrawerHeader(
+          margin: const EdgeInsets.symmetric(horizontal: 20),
           child: Center(
             child: Wrap(
               direction: Axis.vertical,
@@ -33,6 +35,10 @@ class AppDrawer extends ConsumerWidget {
           icon: Icon(Icons.account_circle_outlined),
         ),
         const NavigationDrawerDestination(
+          label: Text('Current goals'),
+          icon: Icon(Icons.star),
+        ),
+        const NavigationDrawerDestination(
           label: Text('Completed goals'),
           icon: Icon(Icons.done),
         ),
@@ -40,7 +46,7 @@ class AppDrawer extends ConsumerWidget {
           label: Text('Settings'),
           icon: Icon(Icons.settings),
         ),
-        const Divider(),
+        const Divider(indent: 20, endIndent: 20),
         Expanded(
           child: Align(
             alignment: Alignment.bottomCenter,
