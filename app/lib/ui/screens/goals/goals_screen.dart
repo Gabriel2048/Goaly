@@ -25,7 +25,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
       ),
       drawer: const AppDrawer(),
       body: const Padding(
-        padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 80),
         child: ExistingGoalsList(),
       ),
       floatingActionButton: FloatingActionButton.extended(
