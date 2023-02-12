@@ -10,28 +10,45 @@ class AppDrawer extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final authService = ref.watch(authenticationServiceProvider);
     final user = authService.currentUser;
-    return Drawer(
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            DrawerHeader(
-              child: Center(
-                child: Wrap(
-                  direction: Axis.vertical,
-                  spacing: 20,
-                  children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundImage: NetworkImage(user.photoURL!),
-                    ),
-                    Text(user.displayName!)
-                  ],
+
+    return NavigationDrawer(
+      children: [
+        DrawerHeader(
+          child: Center(
+            child: Wrap(
+              direction: Axis.vertical,
+              spacing: 20,
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(user.photoURL!),
                 ),
-              ),
+                Text(user.displayName!)
+              ],
             ),
-            ListTile(
-              title: const Text("Log out"),
+          ),
+        ),
+        const NavigationDrawerDestination(
+          label: Text('Profile'),
+          icon: Icon(Icons.account_circle_outlined),
+        ),
+        const NavigationDrawerDestination(
+          label: Text('Completed goals'),
+          icon: Icon(Icons.done),
+        ),
+        const NavigationDrawerDestination(
+          label: Text('Settings'),
+          icon: Icon(Icons.settings),
+        ),
+        const Divider(),
+        Expanded(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: ListTile(
+              title: const Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Text("Log out"),
+              ),
               onTap: () async {
                 final navigator = Navigator.of(context);
                 await authService.logOut();
@@ -39,9 +56,9 @@ class AppDrawer extends ConsumerWidget {
                     MaterialPageRoute(builder: (_) => const AuthScreen()));
               },
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
