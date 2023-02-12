@@ -39,7 +39,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
   @override
   void didPushNext() {
     setState(() {
-      isExpanded = !isExpanded;
+      isExpanded = false;
     });
   }
 

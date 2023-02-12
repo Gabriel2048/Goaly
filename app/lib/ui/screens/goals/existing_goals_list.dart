@@ -15,7 +15,10 @@ class ExistingGoalsList extends StatelessWidget {
           data: (data) => ListView.separated(
             itemCount: data.length,
             itemBuilder: (_, int index) {
-              return ExistingGoalCard(goal: data[index]);
+              return ExistingGoalCard(
+                goal: data[index],
+                key: Key(data[index].id),
+              );
             },
             separatorBuilder: (_, __) => const SizedBox(height: 10),
           ),

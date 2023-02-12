@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:goaly/domain/goal.dart';
 import 'package:goaly/domain/goal_frequency.dart';
 import 'package:goaly/domain/goal_time_of_day.dart';
 import 'package:goaly/domain/goal_type.dart';
+import 'package:goaly/services/goals/add_goal_model.dart';
 import 'package:goaly/services/goals/goals_service.dart';
 import 'package:goaly/ui/screens/add_goal_details/frequency_dropdown.dart';
 import 'package:goaly/ui/screens/add_goal_details/time_of_day_dropdown.dart';
@@ -67,7 +67,7 @@ class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
 
                 if (_formKey.currentState?.validate() ?? false) {
                   _formKey.currentState?.save();
-                  goalsService.addGoal(Goal(
+                  goalsService.addGoal(AddGoalModel(
                     timeOfDay: _formData[_timeOfDayKey],
                     frequency: _formData[_frequencyKey],
                     title: widget.hasTitleConfigurable
