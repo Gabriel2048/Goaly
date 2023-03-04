@@ -1,13 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/ui/screens/add_goal_details/add_goal_details_form.dart';
+import 'package:goaly/ui/screens/add_goal_details/form_mode_segments.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddGoalDetailsScreen extends StatelessWidget {
+class AddGoalDetailsScreen extends StatefulWidget {
   final GoalDescription goalDescription;
 
   const AddGoalDetailsScreen({Key? key, required this.goalDescription})
       : super(key: key);
+
+  @override
+  State<AddGoalDetailsScreen> createState() => _AddGoalDetailsScreenState();
+}
+
+class _AddGoalDetailsScreenState extends State<AddGoalDetailsScreen> {
+  var _formMode = FormMode.simple;
+
+  void _onFormModeSelectionChanged(FormMode mode) {
+    setState(() {
+      _formMode = mode;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +40,9 @@ class AddGoalDetailsScreen extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: goalDescription.goalType,
+              tag: widget.goalDescription.goalType,
               child: Text(
-                goalDescription.description,
+                widget.goalDescription.description,
                 style: GoogleFonts.chewy(
                   textStyle: Theme.of(context).textTheme.headlineSmall,
                 ),
@@ -36,8 +50,22 @@ class AddGoalDetailsScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 35, right: 35, top: 35),
-              child: AddGoalDetailsForm(
-                goalType: goalDescription.goalType,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: double.infinity,
+                    child: FormModeSegments(
+                      formMode: _formMode,
+                      onSelectionChanged: _onFormModeSelectionChanged,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  AddGoalDetailsForm(
+                    goalType: widget.goalDescription.goalType,
+                  ),
+                ],
               ),
             ),
           ],
