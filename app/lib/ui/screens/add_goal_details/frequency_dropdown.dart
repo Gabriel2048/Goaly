@@ -17,7 +17,7 @@ class FrequencyDropdown extends StatelessWidget {
       onSaved: onSaved,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'Frequency (required)',
+        labelText: 'Frequency*',
       ),
       items: [
         _FrequencyMenuItem(frequency: GoalFrequency.weekly),
