@@ -43,7 +43,7 @@ class _AddGoalDetailsFormState extends State<AddGoalDetailsForm> {
               },
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Title*',
+                labelText: 'Title',
               ),
             ),
           if (widget.hasTitleConfigurable) spacing,

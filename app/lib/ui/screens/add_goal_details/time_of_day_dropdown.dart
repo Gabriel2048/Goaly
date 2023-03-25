@@ -17,7 +17,7 @@ class TimeOfDayDropdown extends StatelessWidget {
       onSaved: onSaved,
       decoration: const InputDecoration(
         border: OutlineInputBorder(),
-        labelText: 'Time of day*',
+        labelText: 'Time of day',
       ),
       items: const [
         DropdownMenuItem(
