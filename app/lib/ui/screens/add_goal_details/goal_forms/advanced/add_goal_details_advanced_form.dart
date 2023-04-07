@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/advanced/day_picker.dart';
+import 'package:goaly/ui/widgets/infrastructure/switch_list_tile_with_no_ripple.dart';
 
 class AddGoalDetailsAdvancedForm extends StatefulWidget {
   const AddGoalDetailsAdvancedForm({Key? key}) : super(key: key);
@@ -16,23 +17,20 @@ class _AddGoalDetailsAdvancedFormState
   @override
   Widget build(BuildContext context) {
     return Column(
-      // runAlignment: WrapAlignment.spaceEvenly,
-      // direction: Axis.vertical,
       children: [
         const DayPicker(),
         const SizedBox(
           height: 20,
         ),
-        SwitchListTile(
+        SwitchListTileWithNoRipple(
           value: isSameHourEachDay,
-          onChanged: (value) {
+          label: const Text("Same hour each day"),
+          onTap: () {
             setState(() {
               isSameHourEachDay = !isSameHourEachDay;
             });
           },
-          title: const Text("Same hour each day"),
-          contentPadding: const EdgeInsets.only(left: 5),
-        )
+        ),
       ],
     );
   }
