@@ -9,9 +9,13 @@ final goalDescriptionProvider =
     GoalDescription(
         'assets/goals/icons/gym.png', 'Go to the gym', GoalType.gym),
     GoalDescription(
+        'assets/goals/icons/reading.png', 'Start reading', GoalType.read),
+    GoalDescription(
+        'assets/goals/icons/biking.png', 'Bike more', GoalType.bike),
+    GoalDescription(
         'assets/goals/icons/meditate.png', 'Meditate', GoalType.meditate),
     GoalDescription(
-        'assets/goals/icons/board.png', 'Custom goal', GoalType.custom)
+        'assets/goals/icons/board.png', 'Set up a custom goal', GoalType.custom)
   ]);
 });
 
