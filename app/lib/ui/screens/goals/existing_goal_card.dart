@@ -35,21 +35,21 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
     final canDelete = await showDialog<bool>(
       context: context,
       builder: (ctx) => AlertDialog(
-        title: const Text("Deleting your goal"),
+        title: const Text("Deleting your goal?"),
         content: const Text(
-            "Your are about to delete this goal. This actions is irreversible.\n\nAre you sure?"),
+            "Your are about to delete this goal. This actions is irreversible."),
         actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop(true);
-            },
-            child: const Text("Yes, delete."),
-          ),
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop(false);
             },
-            child: const Text("No, keep."),
+            child: const Text("No"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(ctx).pop(true);
+            },
+            child: const Text("Yes"),
           ),
         ],
       ),
