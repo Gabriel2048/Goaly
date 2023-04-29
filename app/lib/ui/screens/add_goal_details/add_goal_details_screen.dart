@@ -38,42 +38,45 @@ class _AddGoalDetailsScreenState extends State<AddGoalDetailsScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 30),
-        //mainAxisSize to MainAxisSize.min and using FlexFit.loose
-        child: Column(
-          children: [
-            Hero(
-              tag: widget.goalDescription.goalType,
-              child: Text(
-                widget.goalDescription.description,
-                style: GoogleFonts.chewy(
-                  textStyle: Theme.of(context).textTheme.headlineSmall,
+        child: Hero(
+          tag: widget.goalDescription.goalType,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Text(
+                  widget.goalDescription.description,
+                  style: GoogleFonts.chewy(
+                    textStyle: Theme.of(context).textTheme.headlineSmall,
+                  ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 35, right: 35, top: 35),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    child: FormModeSegments(
-                      formMode: _formMode,
-                      onSelectionChanged: _onFormModeSelectionChanged,
-                    ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 35, right: 35, top: 35),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: double.infinity,
+                        child: FormModeSegments(
+                          formMode: _formMode,
+                          onSelectionChanged: _onFormModeSelectionChanged,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Material(
+                        child: _formMode == FormMode.simple
+                            ? AddGoalDetailsForm(
+                                goalType: widget.goalDescription.goalType,
+                              )
+                            : const AddGoalDetailsAdvancedForm(),
+                      )
+                    ],
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  _formMode == FormMode.simple
-                      ? AddGoalDetailsForm(
-                          goalType: widget.goalDescription.goalType,
-                        )
-                      : const AddGoalDetailsAdvancedForm(),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

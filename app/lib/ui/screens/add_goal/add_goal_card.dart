@@ -17,16 +17,16 @@ class AddGoalCard extends StatelessWidget {
 
     return TappableCard(
       height: height,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Row(
-          children: [
-            Image.asset(goalDescription.assetPath),
-            Expanded(
-              child: Align(
-                alignment: Alignment.center,
-                child: Hero(
-                  tag: goalDescription.goalType,
+      child: Hero(
+        tag: goalDescription.goalType,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            children: [
+              Image.asset(goalDescription.assetPath),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
                   child: Text(
                     goalDescription.description,
                     style: GoogleFonts.chewy(
@@ -34,19 +34,29 @@ class AddGoalCard extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
       onTap: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) =>
-                AddGoalDetailsScreen(goalDescription: goalDescription),
-          ),
-        );
+            context,
+            PageRouteBuilder(
+              transitionDuration: const Duration(milliseconds: 500),
+              pageBuilder: (_, animation, ___) => AddGoalDetailsScreen(goalDescription: goalDescription),
+              transitionsBuilder: (_, animation, __, child) {
+                return FadeTransition(
+                  opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
+                    CurvedAnimation(
+                      parent: animation,
+                      curve: Curves.fastOutSlowIn,
+                    ),
+                  ),
+                  child: child,
+                );
+              },
+            ));
       },
     );
   }

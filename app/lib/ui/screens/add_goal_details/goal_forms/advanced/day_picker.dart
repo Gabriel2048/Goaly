@@ -15,11 +15,11 @@ class DayPicker extends StatelessWidget {
       children: [
         for (var weekDay in WeekDays.values)
           SizedBox(
+            key: Key(weekDay.toString()),
             width: 40,
             height: 40,
             child: DayButton(
               weekDay: weekDay,
-              key: Key(weekDay.toString()),
             ),
           )
       ],
