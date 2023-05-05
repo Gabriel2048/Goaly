@@ -66,7 +66,7 @@ class _AddGoalDetailsScreenState extends State<AddGoalDetailsScreen> {
                       ),
                       Material(
                         child: _formMode == FormMode.simple
-                            ? AddGoalDetailsForm(
+                            ? AddGoalDetailsSimpleForm(
                                 goalType: widget.goalDescription.goalType,
                               )
                             : const AddGoalDetailsAdvancedForm(),
