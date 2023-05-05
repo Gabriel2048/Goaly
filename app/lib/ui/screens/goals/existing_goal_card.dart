@@ -4,7 +4,7 @@ import 'package:goaly/domain/goal.dart';
 import 'package:goaly/main.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/services/goaly_gollections.dart';
-import 'package:goaly/ui/screens/add_goal_details/frequency_dropdown.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/simple/frequency_dropdown.dart';
 import 'package:goaly/ui/widgets/infrastructure/tappable_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -5,8 +5,8 @@ import 'package:goaly/domain/goal_time_of_day.dart';
 import 'package:goaly/domain/goal_type.dart';
 import 'package:goaly/services/goals/add_goal_model.dart';
 import 'package:goaly/services/goals/goals_service.dart';
-import 'package:goaly/ui/screens/add_goal_details/frequency_dropdown.dart';
-import 'package:goaly/ui/screens/add_goal_details/time_of_day_dropdown.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/simple/frequency_dropdown.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/simple/time_of_day_dropdown.dart';
 
 class AddGoalDetailsSimpleForm extends StatefulWidget {
   final GoalType goalType;
