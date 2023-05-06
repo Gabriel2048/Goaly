@@ -4,11 +4,13 @@ class TimeListTile extends StatelessWidget {
   final TimeOfDay time;
   final Widget label;
   final Widget trailing;
+  final CrossAxisAlignment crossAxisAlignment;
   final void Function(TimeOfDay)? onTimeChanged;
 
   const TimeListTile({
     Key? key,
     this.time = const TimeOfDay(hour: 12, minute: 0),
+    this.crossAxisAlignment = CrossAxisAlignment.center,
     required this.label,
     required this.trailing,
     this.onTimeChanged,
@@ -25,6 +27,7 @@ class TimeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         label,
         Expanded(
