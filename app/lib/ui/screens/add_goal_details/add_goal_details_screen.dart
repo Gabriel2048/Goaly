@@ -8,8 +8,10 @@ import 'package:google_fonts/google_fonts.dart';
 class AddGoalDetailsScreen extends StatefulWidget {
   final GoalDescription goalDescription;
 
-  const AddGoalDetailsScreen({Key? key, required this.goalDescription})
-      : super(key: key);
+  const AddGoalDetailsScreen({
+    Key? key,
+    required this.goalDescription,
+  }) : super(key: key);
 
   @override
   State<AddGoalDetailsScreen> createState() => _AddGoalDetailsScreenState();

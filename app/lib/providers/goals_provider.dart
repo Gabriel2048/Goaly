@@ -6,6 +6,8 @@ final goalsProvider = StreamProvider<List<Goal>>((ref) async* {
   final goalsService = ref.watch(goalsServiceProvider);
 
   await for (var snapshot in goalsService.getCurrentUserGoalsSnapshots()) {
-    yield snapshot.docs.map((e) => Goal.fromMap(e.data(), e.id)).toList();
+    yield snapshot.docs.map((e) {
+      return Goal.fromMap(e.data(), e.id);
+    }).toList();
   }
 });
