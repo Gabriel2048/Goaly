@@ -22,6 +22,8 @@ jobs:
       with:
         channel: 'stable'
     - uses: dart-lang/setup-dart@v1
+      with:
+        sdk: 'beta'
 
     - run: flutter pub get
       working-directory: app
