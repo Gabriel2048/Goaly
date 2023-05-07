@@ -1,14 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-enum WeekDays {
-  monday,
-  tuesday,
-  wednesday,
-  thursday,
-  friday,
-  saturday,
-  sunday,
-}
+import 'package:goaly/core/week_days.dart';
 
 class SelectedWeekDaysNotifier extends StateNotifier<List<WeekDays>> {
   SelectedWeekDaysNotifier() : super([]);
