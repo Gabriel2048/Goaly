@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days_notifier.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days_provider.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_notifier.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_provider.dart';
 
 class DayPicker extends StatelessWidget {
-  const DayPicker({
-    Key? key,
-  }) : super(key: key);
+  const DayPicker({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
