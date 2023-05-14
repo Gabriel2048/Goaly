@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:http/http.dart' as http;
 
@@ -66,8 +65,3 @@ class GoogleAuthenticationService {
     return authenticatedClient(http.Client(), credentials);
   }
 }
-
-final googleAuthenticationServiceProvider =
-    Provider<GoogleAuthenticationService>((ref) {
-  return GoogleAuthenticationService();
-});

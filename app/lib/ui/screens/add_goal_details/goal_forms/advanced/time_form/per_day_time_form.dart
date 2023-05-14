@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goaly/core/week_days.dart';
 import 'package:goaly/extensions/string/string_extensions.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_notifier.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_provider.dart';
 import 'package:goaly/ui/widgets/infrastructure/time_list_tile.dart';
+import 'package:provider/provider.dart';
 
-class PerDayTimeForm extends ConsumerWidget {
+class PerDayTimeForm extends StatelessWidget {
   const PerDayTimeForm({Key? key}) : super(key: key);
 
   int _sortByDayIndex(WeekDays left, WeekDays right) {
@@ -13,8 +13,9 @@ class PerDayTimeForm extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    var selectedWeekDays = ref.watch(selectedWeekDaysProvider);
+  Widget build(BuildContext context) {
+    var selectedWeekDays =
+        context.watch<SelectedWeekDaysProvider>().selectedDays;
     selectedWeekDays.sort(_sortByDayIndex);
 
     return Column(

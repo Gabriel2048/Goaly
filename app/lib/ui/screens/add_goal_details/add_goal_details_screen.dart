@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_notifier.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/simple/add_goal_details_simple_form.dart';
 import 'package:goaly/ui/screens/add_goal_details/form_mode_segments.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/advanced/add_goal_details_advanced_form.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AddGoalDetailsScreen extends StatefulWidget {
   final GoalDescription goalDescription;
@@ -66,13 +68,14 @@ class _AddGoalDetailsScreenState extends State<AddGoalDetailsScreen> {
                       const SizedBox(
                         height: 40,
                       ),
-                      Material(
-                        child: _formMode == FormMode.simple
-                            ? AddGoalDetailsSimpleForm(
-                                goalType: widget.goalDescription.goalType,
-                              )
-                            : const AddGoalDetailsAdvancedForm(),
-                      )
+                      ChangeNotifierProvider<SelectedWeekDaysProvider>(
+                        create: (_) => SelectedWeekDaysProvider(),
+                        child: Material(
+                          child: _formMode == FormMode.simple
+                              ? const AddGoalDetailsSimpleForm()
+                              : const AddGoalDetailsAdvancedForm(),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
+import 'package:provider/provider.dart';
 
-class AppDrawer extends ConsumerWidget {
+class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final authService = ref.watch(authenticationServiceProvider);
-    final user = authService.currentUser;
+  Widget build(BuildContext context) {
+    final authService = context.watch<AuthenticationService>();
 
     return NavigationDrawer(
       selectedIndex: 1,
@@ -23,9 +22,10 @@ class AppDrawer extends ConsumerWidget {
               children: [
                 CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage(user.photoURL!),
+                  backgroundImage:
+                  NetworkImage(authService.currentUser.photoURL!),
                 ),
-                Text(user.displayName!)
+                Text(authService.currentUser.displayName!)
               ],
             ),
           ),

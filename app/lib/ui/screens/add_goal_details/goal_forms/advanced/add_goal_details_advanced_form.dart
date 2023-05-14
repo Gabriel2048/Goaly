@@ -13,7 +13,7 @@ class AddGoalDetailsAdvancedForm extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        TimeForm(),
+        TimeForm()
       ],
     );
   }

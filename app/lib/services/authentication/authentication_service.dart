@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/services/authentication/google_authentication_service.dart';
 
 class AuthenticationService {
@@ -25,8 +24,3 @@ class AuthenticationService {
   User get currentUser => FirebaseAuth.instance.currentUser
       ?? (throw Exception("Attempted to use currentUser while no user logged in. Use this getter in conjunction with isLoggedIn."));
 }
-
-final authenticationServiceProvider = Provider<AuthenticationService>((ref) {
-  final googleAuthService = ref.watch(googleAuthenticationServiceProvider);
-  return AuthenticationService(googleAuthService);
-});

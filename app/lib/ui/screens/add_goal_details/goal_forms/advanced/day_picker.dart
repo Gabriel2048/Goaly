@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:goaly/core/week_days.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_notifier.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_provider.dart';
+import 'package:provider/provider.dart';
 
 class DayPicker extends StatelessWidget {
   const DayPicker({Key? key}) : super(key: key);
@@ -25,7 +25,7 @@ class DayPicker extends StatelessWidget {
   }
 }
 
-class DayButton extends ConsumerWidget {
+class DayButton extends StatelessWidget {
   final WeekDays weekDay;
 
   const DayButton({
@@ -34,14 +34,13 @@ class DayButton extends ConsumerWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final isSelected = ref.watch(selectedWeekDaysProvider).contains(weekDay);
+  Widget build(BuildContext context) {
+    final selectedWeekDays = context.watch<SelectedWeekDaysProvider>();
 
     return OutlinedButton(
-      onPressed: () =>
-          ref.read(selectedWeekDaysProvider.notifier).toggleDay(weekDay),
+      onPressed: () => selectedWeekDays.toggleDay(weekDay),
       style: ElevatedButton.styleFrom(
-        backgroundColor: isSelected
+        backgroundColor: selectedWeekDays.containsDay(weekDay)
             ? Theme.of(context).buttonTheme.colorScheme?.secondaryContainer
             : null,
         padding: EdgeInsets.zero,

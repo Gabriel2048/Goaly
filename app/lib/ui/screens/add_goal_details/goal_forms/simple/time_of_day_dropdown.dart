@@ -37,7 +37,7 @@ class TimeOfDayDropdown extends StatelessWidget {
           child: Text('Anytime'),
         )
       ],
-      onChanged: (GoalTimeOfDay? value) {},
+      onChanged: onSaved,
     );
   }
 }

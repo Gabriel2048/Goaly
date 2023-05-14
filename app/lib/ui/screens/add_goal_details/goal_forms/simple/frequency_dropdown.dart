@@ -26,7 +26,7 @@ class FrequencyDropdown extends StatelessWidget {
         _FrequencyMenuItem(frequency: GoalFrequency.daily),
         _FrequencyMenuItem(frequency: GoalFrequency.monthly),
       ],
-      onChanged: (GoalFrequency? value) {},
+      onChanged: onSaved,
     );
   }
 }

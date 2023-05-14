@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:goaly/domain/goal.dart';
+import 'package:goaly/domain/goal_frequency.dart';
 import 'package:goaly/main.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/services/goaly_gollections.dart';
@@ -77,6 +77,9 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
 
   @override
   Widget build(BuildContext context) {
+    final goalDescription = goalsDescriptions
+        .singleWhere((element) => element.goalType == widget.goal.goalType);
+
     return Dismissible(
       key: Key(widget.goal.id),
       confirmDismiss: _handleConfirmDismiss,
@@ -96,32 +99,23 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: padding),
-                child: Consumer(
-                  builder:
-                      (BuildContext context, WidgetRef ref, Widget? child) {
-                    final goalsDescriptions =
-                        ref.watch(goalDescriptionProvider);
-                    final goalDescription = goalsDescriptions.singleWhere(
-                        (element) => element.goalType == widget.goal.goalType);
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          goalDescription.description,
-                          style: GoogleFonts.chewy(
-                            textStyle:
-                                Theme.of(context).textTheme.headlineSmall,
-                          ),
-                        ),
-                        Image.asset(
-                          goalDescription.assetPath,
-                          color: Colors.white.withOpacity(0.3),
-                          colorBlendMode: BlendMode.modulate,
-                          height: 100,
-                        ),
-                      ],
-                    );
-                  },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      goalDescription.description,
+                      style: GoogleFonts.chewy(
+                        textStyle:
+                        Theme.of(context).textTheme.headlineSmall,
+                      ),
+                    ),
+                    Image.asset(
+                      goalDescription.assetPath,
+                      color: Colors.white.withOpacity(0.3),
+                      colorBlendMode: BlendMode.modulate,
+                      height: 100,
+                    ),
+                  ],
                 ),
               ),
               const Padding(
@@ -134,7 +128,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      frequencyToLabelMap[widget.goal.frequency]!,
+                      frequencyToLabelMap[GoalFrequency.threeTimesPerWeek]!,
                       style: GoogleFonts.chewy(
                         textStyle: Theme.of(context).textTheme.bodyLarge,
                       ),

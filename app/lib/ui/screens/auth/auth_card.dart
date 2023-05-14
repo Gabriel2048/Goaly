@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/goals/goals_screen.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 class AuthCard extends StatefulWidget {
   const AuthCard({Key? key}) : super(key: key);
@@ -52,16 +52,14 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
             ),
           ),
           child: Center(
-            child: Consumer(
-              builder: (_, WidgetRef ref, __) {
+            child: Consumer<AuthenticationService>(
+              builder: (ctx, auth, _) {
                 return ElevatedButton.icon(
                   style:
                       ElevatedButton.styleFrom(fixedSize: const Size(230, 60)),
                   onPressed: () async {
-                    final authService =
-                        ref.watch(authenticationServiceProvider);
                     final navigator = Navigator.of(context);
-                    final credentials = await authService.startGoogleAuth();
+                    final credentials = await auth.startGoogleAuth();
                     if (credentials != null) {
                       navigator.pushReplacement(
                         MaterialPageRoute(builder: (_) => const GoalsScreen()),

@@ -1,18 +1,19 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 import 'package:goaly/core/week_days.dart';
 
-class SelectedWeekDaysNotifier extends StateNotifier<List<WeekDays>> {
-  SelectedWeekDaysNotifier() : super([]);
+class SelectedWeekDaysProvider extends ChangeNotifier {
+  final List<WeekDays> _selectedDays = [];
+
+  List<WeekDays> get selectedDays => _selectedDays;
 
   void toggleDay(WeekDays day) {
-    final newState = [...state];
-
-    if (state.contains(day)) {
-      newState.remove(day);
+    if (_selectedDays.contains(day)) {
+      _selectedDays.remove(day);
     } else {
-      newState.add(day);
+      _selectedDays.add(day);
     }
-
-    state = newState;
+    notifyListeners();
   }
+
+  bool containsDay(WeekDays day) => _selectedDays.contains(day);
 }

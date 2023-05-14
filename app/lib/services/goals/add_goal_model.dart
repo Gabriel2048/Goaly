@@ -1,26 +1,31 @@
-import 'package:goaly/domain/goal_frequency.dart';
-import 'package:goaly/domain/goal_time_of_day.dart';
+import 'package:goaly/domain/goal.dart';
 import 'package:goaly/domain/goal_type.dart';
 
 class AddGoalModel {
-  final GoalTimeOfDay timeOfDay;
-  final GoalFrequency frequency;
-  final GoalType goalType;
+  late final GoalType goalType;
   final String? title;
+  final List<Frequency> frequency;
 
-  const AddGoalModel({
-    required this.timeOfDay,
-    required this.frequency,
+  AddGoalModel({
     required this.title,
-    required this.goalType,
+    this.frequency = const [],
   });
 
   Map<String, String?> toMap() {
     return {
-      'timeOfDay': timeOfDay.name,
-      'frequency': frequency.name,
       'title': title,
       'goalType': goalType.name,
     };
+  }
+
+  AddGoalModel copyWith({
+    String? title,
+    List<Frequency>? frequency,
+    GoalType? goalType,
+  }) {
+    return AddGoalModel(
+      title: title ?? this.title,
+      frequency: frequency ?? this.frequency,
+    )..goalType = goalType ?? this.goalType;
   }
 }
