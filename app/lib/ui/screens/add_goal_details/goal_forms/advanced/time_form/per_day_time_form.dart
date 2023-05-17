@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/core/week_days.dart';
 import 'package:goaly/extensions/string/string_extensions.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_notifier.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
 import 'package:goaly/ui/widgets/infrastructure/time_list_tile.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +15,7 @@ class PerDayTimeForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var selectedWeekDays =
-        context.watch<SelectedWeekDaysProvider>().selectedDays;
+        context.watch<GoalFormProvider>().selectedDays;
     selectedWeekDays.sort(_sortByDayIndex);
 
     return Column(

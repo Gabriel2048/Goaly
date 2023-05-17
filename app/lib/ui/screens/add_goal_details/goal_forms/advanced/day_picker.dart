@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/core/week_days.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/selected_week_days/selected_week_days_notifier.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
 import 'package:provider/provider.dart';
 
 class DayPicker extends StatelessWidget {
@@ -35,7 +35,7 @@ class DayButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedWeekDays = context.watch<SelectedWeekDaysProvider>();
+    final selectedWeekDays = context.watch<GoalFormProvider>();
 
     return OutlinedButton(
       onPressed: () => selectedWeekDays.toggleDay(weekDay),

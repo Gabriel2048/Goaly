@@ -26,14 +26,17 @@ class _TimeFormState extends State<TimeForm> {
         SwitchListTileWithNoRipple(
           value: isSameHourEveryday,
           label: const Text(
-            "Same hour everyday",
+            "Configure hours for each day separately",
             style: TextStyle(fontSize: 20),
           ),
           onTap: _onSameHourEachDayTap,
         ),
+        const SizedBox(
+          height: 20,
+        ),
         isSameHourEveryday
-            ? const SameTimeEverydayForm()
-            : const PerDayTimeForm(),
+            ? const PerDayTimeForm()
+            : const SameTimeEverydayForm(),
       ],
     );
   }
