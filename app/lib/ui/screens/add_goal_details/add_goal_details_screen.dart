@@ -67,9 +67,14 @@ class _AddGoalDetailsScreenState extends State<AddGoalDetailsScreen> {
                         height: 40,
                       ),
                       Material(
-                        child: _formMode == FormMode.simple
-                            ? const AddGoalDetailsSimpleForm()
-                            : const AddGoalDetailsAdvancedForm(),
+                        child: AnimatedCrossFade(
+                          duration: const Duration(milliseconds: 150),
+                          crossFadeState: _formMode == FormMode.simple
+                              ? CrossFadeState.showFirst
+                              : CrossFadeState.showSecond,
+                          firstChild: const AddGoalDetailsSimpleForm(),
+                          secondChild: const AddGoalDetailsAdvancedForm(),
+                        ),
                       ),
                     ],
                   ),

@@ -29,7 +29,7 @@ class AddGoalDetailsAdvancedForm extends StatelessWidget {
           ),
         const DayPicker(),
         const SizedBox(
-          height: 40,
+          height: 20,
         ),
         const TimeForm()
       ],
