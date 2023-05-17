@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/domain/goal_frequency.dart';
 import 'package:goaly/domain/goal_time_of_day.dart';
-import 'package:goaly/domain/goal_type.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/simple/frequency_dropdown.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/simple/time_of_day_dropdown.dart';
+import 'package:provider/provider.dart';
 
 class AddGoalDetailsSimpleForm extends StatefulWidget {
   const AddGoalDetailsSimpleForm({Key? key}) : super(key: key);
@@ -23,10 +24,8 @@ class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
 
   @override
   Widget build(BuildContext context) {
+    final hasTitleConfigurable = Provider.of<GoalFormProvider>(context, listen: false).hasTitleConfigurable;
     const spacing = SizedBox(height: 40);
-    const goalType = GoalType.gym;
-    // title is not seen on the advanced form yet. needs to be added
-    const hasTitleConfigurable = goalType == GoalType.custom;
     return Form(
       key: _formKey,
       child: Column(

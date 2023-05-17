@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:goaly/firebase_options.dart';
 import 'package:goaly/infrastructure/providers/services_providers.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,6 +26,9 @@ Future<void> main() async {
   runApp(MultiProvider(
     providers: [
       ...servicesProvider,
+      ChangeNotifierProvider(
+        create: (_) => GoalFormProvider(),
+      ),
     ],
     child: const MyApp(),
   ));

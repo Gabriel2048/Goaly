@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/ui/screens/add_goal_details/add_goal_details_screen.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
 import 'package:goaly/ui/widgets/infrastructure/tappable_card.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AddGoalCard extends StatelessWidget {
   final GoalDescription goalDescription;
@@ -40,6 +42,8 @@ class AddGoalCard extends StatelessWidget {
         ),
       ),
       onTap: () {
+        Provider.of<GoalFormProvider>(context, listen: false)
+            .setGoalType(goalDescription.goalType);
         Navigator.push(
             context,
             PageRouteBuilder(
