@@ -22,8 +22,21 @@ class _TimeFormState extends State<TimeForm> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final selectedDays = context.watch<GoalFormProvider>().selectedDays;
+    if (selectedDays.length == 1 && isConfiguringHoursEachDay) {
+      setState(() {
+        isConfiguringHoursEachDay = false;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final selectedDays = context.watch<GoalFormProvider>().selectedDays;
+    final multipleDaysSelected = selectedDays.length > 1;
+
     return AnimatedOpacity(
       opacity: selectedDays.isNotEmpty ? 1 : 0.0,
       duration: const Duration(milliseconds: 200),
@@ -41,7 +54,7 @@ class _TimeFormState extends State<TimeForm> {
             height: 20,
           ),
           AnimatedOpacity(
-            opacity: selectedDays.length > 1 ? 1 : 0.0,
+            opacity: multipleDaysSelected ? 1 : 0.0,
             duration: const Duration(milliseconds: 200),
             child: SwitchListTileWithNoRipple(
               value: isConfiguringHoursEachDay,
@@ -49,7 +62,7 @@ class _TimeFormState extends State<TimeForm> {
                 "Configure hours for each day separately",
                 style: TextStyle(fontSize: 20),
               ),
-              onTap: _onSameHourEachDayTap,
+              onTap: multipleDaysSelected ? _onSameHourEachDayTap : null,
             ),
           ),
         ],

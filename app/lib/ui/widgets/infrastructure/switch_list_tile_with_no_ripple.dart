@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SwitchListTileWithNoRipple extends StatelessWidget {
   final bool value;
   final Widget label;
-  final Function() onTap;
+  final Function()? onTap;
 
   const SwitchListTileWithNoRipple({
     super.key,
@@ -24,9 +24,7 @@ class SwitchListTileWithNoRipple extends StatelessWidget {
         ),
         Switch(
           value: value,
-          onChanged: (_) {
-            onTap();
-          },
+          onChanged: onTap == null ? null : (_) => onTap!(),
         ),
       ],
     );
