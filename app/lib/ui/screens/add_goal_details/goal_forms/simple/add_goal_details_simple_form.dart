@@ -24,7 +24,9 @@ class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
 
   @override
   Widget build(BuildContext context) {
-    final hasTitleConfigurable = Provider.of<GoalFormProvider>(context, listen: false).hasTitleConfigurable;
+    final hasTitleConfigurable =
+        Provider.of<GoalFormProvider>(context, listen: false)
+            .hasTitleConfigurable;
     const spacing = SizedBox(height: 40);
     return Form(
       key: _formKey,
@@ -32,7 +34,7 @@ class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
         padding: const EdgeInsets.only(top: 5),
         child: Column(
           children: [
-            if (hasTitleConfigurable)
+            if (hasTitleConfigurable) ...[
               TextFormField(
                 onSaved: (String? value) {
                   _formData[_titleKey] = value;
@@ -42,7 +44,8 @@ class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
                   labelText: 'Title',
                 ),
               ),
-            if (hasTitleConfigurable) spacing,
+              spacing
+            ],
             FrequencyDropdown(
               onSaved: (GoalFrequency? value) {
                 _formData[_frequencyKey] = value;
