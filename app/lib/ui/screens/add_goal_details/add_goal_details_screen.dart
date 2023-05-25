@@ -36,6 +36,15 @@ class _AddGoalDetailsScreenState extends State<AddGoalDetailsScreen> {
             textStyle: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 25),
+            child: FilledButton(
+              onPressed: () {},
+              child: const Text("Add"),
+            ),
+          ),
+        ],
         automaticallyImplyLeading: false,
       ),
       body: Padding(
