@@ -14,15 +14,19 @@ class PerDayTimeForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var selectedWeekDays =
-        context.watch<GoalFormProvider>().selectedDays;
-    selectedWeekDays.sort(_sortByDayIndex);
+    final goalFormProvider = context.watch<GoalFormProvider>();
+    var selectedDaysTime = goalFormProvider.selectedDaysTime;
+    final selectedWeekDays = goalFormProvider.selectedDays
+      ..sort(_sortByDayIndex);
 
     return Column(
       children: selectedWeekDays.map((e) {
         return TimeListTile(
           key: ValueKey(e),
-          time: TimeOfDay.now(),
+          onTimeChanged: (newTime) {
+            goalFormProvider.setTime(newTime, e);
+          },
+          pickerInitialTime: goalFormProvider.defaultTime,
           label: Text(
             e.name.capitalize(),
             style: const TextStyle(fontSize: 20),
@@ -30,7 +34,7 @@ class PerDayTimeForm extends StatelessWidget {
           trailing: Align(
             alignment: Alignment.centerRight,
             child: Text(
-              TimeOfDay.now().format(context),
+              selectedDaysTime[e]!.format(context),
               style: const TextStyle(fontSize: 50),
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TimeListTile extends StatelessWidget {
-  final TimeOfDay time;
+  final TimeOfDay pickerInitialTime;
   final Widget label;
   final Widget trailing;
   final CrossAxisAlignment crossAxisAlignment;
@@ -9,7 +9,7 @@ class TimeListTile extends StatelessWidget {
 
   const TimeListTile({
     Key? key,
-    this.time = const TimeOfDay(hour: 12, minute: 0),
+    this.pickerInitialTime = const TimeOfDay(hour: 12, minute: 0),
     this.crossAxisAlignment = CrossAxisAlignment.center,
     required this.label,
     required this.trailing,
@@ -17,7 +17,7 @@ class TimeListTile extends StatelessWidget {
   }) : super(key: key);
 
   void _onTimeTap(BuildContext context) async {
-    final pickedTime = await showTimePicker(context: context, initialTime: time);
+    final pickedTime = await showTimePicker(context: context, initialTime: pickerInitialTime);
     if (pickedTime != null && onTimeChanged != null) {
       onTimeChanged!(pickedTime);
     }

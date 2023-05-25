@@ -20,7 +20,7 @@ class _SameTimeEverydayFormState extends State<SameTimeEverydayForm> {
   @override
   Widget build(BuildContext context) {
     return TimeListTile(
-      time: _time,
+      pickerInitialTime: _time,
       label: const Text(
         "Time of day",
         style: TextStyle(fontSize: 20),
