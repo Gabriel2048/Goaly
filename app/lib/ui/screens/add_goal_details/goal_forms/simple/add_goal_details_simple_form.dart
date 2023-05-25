@@ -57,30 +57,6 @@ class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
                 _formData[_timeOfDayKey] = value;
               },
             ),
-            spacing,
-            spacing,
-            ElevatedButton.icon(
-              onPressed: () {
-                // final goalsService = ref.watch(goalsServiceProvider);
-                //
-                // if (_formKey.currentState?.validate() ?? false) {
-                //   _formKey.currentState?.save();
-                //   goalsService.addGoal(AddGoalModel(
-                //     title: widget.hasTitleConfigurable
-                //         ? _formData[_titleKey]
-                //         : null,
-                //   ));
-                // }
-              },
-              icon: const Padding(
-                padding: EdgeInsets.only(left: 20),
-                child: Icon(Icons.add),
-              ),
-              label: const Padding(
-                padding: EdgeInsets.only(top: 20, right: 20, bottom: 20),
-                child: Text('Add your goal'),
-              ),
-            )
           ],
         ),
       ),
