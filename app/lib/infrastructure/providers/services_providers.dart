@@ -4,7 +4,7 @@ import 'package:goaly/services/calendar/calendar_service.dart';
 import 'package:goaly/services/goals/goals_service.dart';
 import 'package:provider/provider.dart';
 
-final servicesProvider = [
+final servicesProviders = [
   Provider<GoogleAuthenticationService>(
     create: (_) => GoogleAuthenticationService(),
   ),
