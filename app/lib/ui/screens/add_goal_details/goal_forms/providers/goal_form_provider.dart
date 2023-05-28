@@ -11,6 +11,7 @@ class GoalFormProvider extends ChangeNotifier {
   late GoalType goalType;
   final defaultTime = const TimeOfDay(hour: 12, minute: 0);
   final Map<WeekDays, TimeOfDay> _selectedDaysTime = {};
+  String? title;
 
   GoalFormProvider(this._goalsService);
 
@@ -35,6 +36,11 @@ class GoalFormProvider extends ChangeNotifier {
     } else {
       _selectedDaysTime[day] = time;
     }
+    notifyListeners();
+  }
+
+  void setTitle(String? title) {
+    this.title = title;
     notifyListeners();
   }
 

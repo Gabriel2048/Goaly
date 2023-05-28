@@ -9,9 +9,8 @@ class AddGoalDetailsAdvancedForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasTitleConfigurable =
-        Provider.of<GoalFormProvider>(context, listen: false)
-            .hasTitleConfigurable;
+    final goalFormProvider = Provider.of<GoalFormProvider>(context);
+    final hasTitleConfigurable = goalFormProvider.hasTitleConfigurable;
 
     return Padding(
       padding: const EdgeInsets.only(top: 5),
@@ -19,7 +18,7 @@ class AddGoalDetailsAdvancedForm extends StatelessWidget {
         children: [
           if (hasTitleConfigurable) ...[
             TextFormField(
-              onSaved: (String? value) {},
+              onSaved: goalFormProvider.setTitle,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Title',

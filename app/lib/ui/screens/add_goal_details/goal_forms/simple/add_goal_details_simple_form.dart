@@ -16,17 +16,12 @@ class AddGoalDetailsSimpleForm extends StatefulWidget {
 
 class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
   final _formKey = GlobalKey<FormState>();
-  static const _timeOfDayKey = 'timeOfDay';
-  static const _frequencyKey = 'frequency';
-  static const _titleKey = 'title';
-
-  final _formData = {};
 
   @override
   Widget build(BuildContext context) {
-    final hasTitleConfigurable =
-        Provider.of<GoalFormProvider>(context, listen: false)
-            .hasTitleConfigurable;
+    final goalFormProvider = Provider.of<GoalFormProvider>(context);
+    final hasTitleConfigurable = goalFormProvider.hasTitleConfigurable;
+
     const spacing = SizedBox(height: 40);
     return Form(
       key: _formKey,
@@ -36,9 +31,7 @@ class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
           children: [
             if (hasTitleConfigurable) ...[
               TextFormField(
-                onSaved: (String? value) {
-                  _formData[_titleKey] = value;
-                },
+                onSaved: goalFormProvider.setTitle,
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Title',
@@ -48,13 +41,11 @@ class _AddGoalDetailsSimpleFormState extends State<AddGoalDetailsSimpleForm> {
             ],
             FrequencyDropdown(
               onSaved: (GoalFrequency? value) {
-                _formData[_frequencyKey] = value;
               },
             ),
             spacing,
             TimeOfDayDropdown(
               onSaved: (GoalTimeOfDay? value) {
-                _formData[_timeOfDayKey] = value;
               },
             ),
           ],
