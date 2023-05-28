@@ -13,26 +13,29 @@ class AddGoalDetailsAdvancedForm extends StatelessWidget {
         Provider.of<GoalFormProvider>(context, listen: false)
             .hasTitleConfigurable;
 
-    return Column(
-      children: [
-        if (hasTitleConfigurable)
-          TextFormField(
-            onSaved: (String? value) {},
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Title',
+    return Padding(
+      padding: const EdgeInsets.only(top: 5),
+      child: Column(
+        children: [
+          if (hasTitleConfigurable) ...[
+            TextFormField(
+              onSaved: (String? value) {},
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Title',
+              ),
             ),
-          ),
-        if (hasTitleConfigurable)
+            const SizedBox(
+              height: 20,
+            ),
+          ],
+          const DayPicker(),
           const SizedBox(
-            height: 40,
+            height: 20,
           ),
-        const DayPicker(),
-        const SizedBox(
-          height: 20,
-        ),
-        const TimeForm()
-      ],
+          const TimeForm()
+        ],
+      ),
     );
   }
 }
