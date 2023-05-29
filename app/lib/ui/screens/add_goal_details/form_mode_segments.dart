@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/form_mode.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
+import 'package:provider/provider.dart';
 
 class FormModeSegments extends StatelessWidget {
-  final FormMode formMode;
-  final Function(FormMode) onSelectionChanged;
-
-  const FormModeSegments({
-    Key? key,
-    required this.formMode,
-    required this.onSelectionChanged,
-  }) : super(key: key);
+  const FormModeSegments({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final goalProvider = Provider.of<GoalFormProvider>(context);
+
     return SegmentedButton<FormMode>(
       segments: const [
         ButtonSegment<FormMode>(
@@ -25,15 +23,10 @@ class FormModeSegments extends StatelessWidget {
           icon: Icon(Icons.settings),
         ),
       ],
-      selected: {formMode},
+      selected: {goalProvider.formMode},
       onSelectionChanged: (values) {
-        onSelectionChanged(values.first);
+        goalProvider.setFormMode(values.first);
       },
     );
   }
-}
-
-enum FormMode {
-  simple,
-  advanced,
 }

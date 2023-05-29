@@ -3,17 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:goaly/core/week_days.dart';
 import 'package:goaly/domain/goal_type.dart';
 import 'package:goaly/services/goals/goals_service.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/form_mode.dart';
 
 class GoalFormProvider extends ChangeNotifier {
+  FormMode formMode = FormMode.simple;
+  late GoalType goalType;
+  String? title;
+  final Map<WeekDays, TimeOfDay> _selectedDaysTime = {};
+
   // ignore: unused_field
   final GoalsService _goalsService;
 
-  late GoalType goalType;
   final defaultTime = const TimeOfDay(hour: 12, minute: 0);
-  final Map<WeekDays, TimeOfDay> _selectedDaysTime = {};
-  String? title;
 
   GoalFormProvider(this._goalsService);
+
+  void setFormMode(FormMode formMode) {
+    this.formMode = formMode;
+    notifyListeners();
+  }
 
   void setGoalType(GoalType goalType) {
     this.goalType = goalType;
