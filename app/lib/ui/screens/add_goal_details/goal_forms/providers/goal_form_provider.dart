@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:goaly/core/week_days.dart';
 import 'package:goaly/domain/goal_type.dart';
+import 'package:goaly/services/goals/add_goal_model.dart';
 import 'package:goaly/services/goals/goals_service.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/form_mode.dart';
 
@@ -50,6 +51,10 @@ class GoalFormProvider extends ChangeNotifier {
   void setTitle(String? title) {
     this.title = title;
     notifyListeners();
+  }
+
+  Future<void> addGoal() async {
+    await _goalsService.addGoal(AddGoalModel(goalType: goalType ,title: title, frequency: []));
   }
 
   bool get hasTitleConfigurable => goalType == GoalType.custom;
