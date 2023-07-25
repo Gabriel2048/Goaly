@@ -4,18 +4,19 @@ import 'package:goaly/domain/goal_type.dart';
 class AddGoalModel {
   final GoalType goalType;
   final String? title;
-  final List<Frequency> frequency;
+  final List<GoalOccurrence> occurrences;
 
   AddGoalModel({
     required this.goalType,
     required this.title,
-    this.frequency = const [],
+    this.occurrences = const [],
   });
 
-  Map<String, String?> toMap() {
+  Map<String, dynamic> toMap() {
     return {
-      'title': title,
       'goalType': goalType.name,
+      'title': title,
+      'occurrences': occurrences.map((occurrence) => occurrence.toMap()).toList(),
     };
   }
 }

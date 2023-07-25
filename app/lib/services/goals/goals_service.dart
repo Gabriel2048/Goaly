@@ -1,7 +1,8 @@
 import 'package:goaly/domain/goal.dart';
 import 'package:goaly/services/calendar/calendar_service.dart';
 import 'package:goaly/services/goals/add_goal_model.dart';
-import 'package:goaly/services/goaly_gollections.dart';
+import 'package:goaly/services/goals/recurrence_builder.dart';
+import 'package:goaly/services/goaly_collections.dart';
 
 class GoalsService {
   final CalendarService _calendarService;
@@ -9,17 +10,23 @@ class GoalsService {
   GoalsService(this._calendarService);
 
   Future<void> addGoal(AddGoalModel goal) async {
-    // final recurrence = RecurrenceBuilder.buildRecurrence(
-    //   goal.frequency,
-    //   goal.timeOfDay,
-    // );
+    _calendarService.sortOccurrences(goal.occurrences);
 
-    await _calendarService.addEvent(
-        DateTime.now(),
-        DateTime.now().add(
-          const Duration(hours: 1),
-        ),
-        []);
+    for (var occurrence in goal.occurrences) {
+      final startDate = _calendarService.getNextWeekDay(
+          occurrence.weekDay, occurrence.timeOfDay);
+      final endDate = _calendarService
+          .getNextWeekDay(occurrence.weekDay, occurrence.timeOfDay)
+          .add(const Duration(days: 14));
+
+      await _calendarService.addEvent(
+        startDate,
+        endDate,
+        [
+          RecurrenceBuilder.recurrenceForDay(occurrence.weekDay),
+        ],
+      );
+    }
 
     await GoalyCollections.goalsOfCurrentUser.add(goal.toMap());
   }

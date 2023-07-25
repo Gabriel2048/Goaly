@@ -1,6 +1,9 @@
 import 'dart:async';
+import 'package:goaly/core/week_days.dart';
+import 'package:goaly/domain/goal.dart';
 import 'package:goaly/services/authentication/google_authentication_service.dart';
 import 'package:googleapis/calendar/v3.dart';
+import 'package:flutter/material.dart';
 
 class CalendarService {
   final GoogleAuthenticationService _googleAuthService;
@@ -28,7 +31,7 @@ class CalendarService {
         timeZone: timeZone,
       ),
       end: EventDateTime(
-        dateTime: end,
+        dateTime: start.add(const Duration(hours: 1)),
         timeZone: timeZone,
       ),
       recurrence: recurrence,
@@ -49,5 +52,34 @@ class CalendarService {
     } finally {
       client.close();
     }
+  }
+
+  DateTime getNextWeekDay(WeekDays day, TimeOfDay? withTimeOfDay) {
+    var now = DateTime.now();
+    int currentWeekday = now.weekday;
+    int targetWeekday = day.index + 1;
+
+    if (targetWeekday <= currentWeekday) {
+      targetWeekday += 7;
+    }
+
+    int daysUntilNextDay = targetWeekday - currentWeekday;
+
+    DateTime nextOccurrence = now.add(Duration(days: daysUntilNextDay));
+    if (withTimeOfDay != null) {
+      nextOccurrence = DateTime(
+        nextOccurrence.year,
+        nextOccurrence.month,
+        nextOccurrence.day,
+        withTimeOfDay.hour,
+        withTimeOfDay.minute,
+      );
+    }
+
+    return nextOccurrence;
+  }
+
+  void sortOccurrences(List<GoalOccurrence> occurrences){
+    occurrences.sort((a, b) => a.weekDay.index.compareTo(b.weekDay.index));
   }
 }
