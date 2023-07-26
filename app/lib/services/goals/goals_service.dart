@@ -19,13 +19,16 @@ class GoalsService {
           .getNextWeekDay(occurrence.weekDay, occurrence.timeOfDay)
           .add(const Duration(days: 14));
 
-      await _calendarService.addEvent(
+      final recurrence = [
+        RecurrenceBuilder.recurrenceForDay(occurrence.weekDay)
+      ];
+
+      final eventId = await _calendarService.addEvent(
         startDate,
         endDate,
-        [
-          RecurrenceBuilder.recurrenceForDay(occurrence.weekDay),
-        ],
+        recurrence,
       );
+      occurrence.googleCalendarEventId = eventId;
     }
 
     await GoalyCollections.goalsOfCurrentUser.add(goal.toMap());

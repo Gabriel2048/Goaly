@@ -35,23 +35,29 @@ class Goal {
 class GoalOccurrence {
   final WeekDays weekDay;
   final TimeOfDay timeOfDay;
+  late final String googleCalendarEventId;
 
-  const GoalOccurrence({
+  GoalOccurrence({
     required this.weekDay,
     required this.timeOfDay,
   });
 
   Map<String, dynamic> toMap() {
     return {
-      'weekDay': weekDay.name, // Store only the enum value
-      'timeOfDay': timeOfDay.hour * 60 + timeOfDay.minute, // Store as minutes since midnight
+      'weekDay': weekDay.name,
+      // Store only the enum value
+      'timeOfDay': timeOfDay.hour * 60 + timeOfDay.minute,
+      // Store as minutes since midnight
+      'googleCalendarEventId': googleCalendarEventId,
     };
   }
 
   static GoalOccurrence fromMap(Map<String, dynamic> map) {
     return GoalOccurrence(
-      weekDay: WeekDays.values.firstWhere((day) => day.toString().split('.')[1] == map['weekDay']),
-      timeOfDay: TimeOfDay(hour: map['timeOfDay'] ~/ 60, minute: map['timeOfDay'] % 60),
+      weekDay: WeekDays.values
+          .firstWhere((day) => day.toString().split('.')[1] == map['weekDay']),
+      timeOfDay: TimeOfDay(
+          hour: map['timeOfDay'] ~/ 60, minute: map['timeOfDay'] % 60),
     );
   }
 }

@@ -17,10 +17,10 @@ class CalendarService {
     return calendar.timeZone!;
   }
 
-  Future<void> addEvent(
+  Future<String> addEvent(
     DateTime start,
     DateTime end,
-    List<String>? recurrence,
+    List<String> recurrence,
   ) async {
     final timeZone = await _getUsersTimeZone();
 
@@ -37,9 +37,11 @@ class CalendarService {
       recurrence: recurrence,
     );
 
-    await _runWithCalendarClient(
+    final event = await _runWithCalendarClient(
       (calendarClient) => calendarClient.events.insert(eventToAdd, 'primary'),
     );
+
+    return event.id!;
   }
 
   /// Utility method for ensuring the AuthClient.close() is called.
@@ -79,7 +81,7 @@ class CalendarService {
     return nextOccurrence;
   }
 
-  void sortOccurrences(List<GoalOccurrence> occurrences){
+  void sortOccurrences(List<GoalOccurrence> occurrences) {
     occurrences.sort((a, b) => a.weekDay.index.compareTo(b.weekDay.index));
   }
 }
