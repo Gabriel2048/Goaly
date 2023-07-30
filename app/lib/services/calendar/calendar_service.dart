@@ -44,6 +44,12 @@ class CalendarService {
     return event.id!;
   }
 
+  Future<void> deleteEvent(String eventId) async {
+    await _runWithCalendarClient(
+      (calendarClient) => calendarClient.events.delete('primary', eventId),
+    );
+  }
+
   /// Utility method for ensuring the AuthClient.close() is called.
   Future<T> _runWithCalendarClient<T>(
       Future<T> Function(CalendarApi) func) async {

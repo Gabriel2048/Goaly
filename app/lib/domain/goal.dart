@@ -40,6 +40,7 @@ class GoalOccurrence {
   GoalOccurrence({
     required this.weekDay,
     required this.timeOfDay,
+    this.googleCalendarEventId = '',
   });
 
   Map<String, dynamic> toMap() {
@@ -58,6 +59,7 @@ class GoalOccurrence {
           .firstWhere((day) => day.toString().split('.')[1] == map['weekDay']),
       timeOfDay: TimeOfDay(
           hour: map['timeOfDay'] ~/ 60, minute: map['timeOfDay'] % 60),
+      googleCalendarEventId: map['googleCalendarEventId'],
     );
   }
 }

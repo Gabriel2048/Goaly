@@ -3,10 +3,11 @@ import 'package:goaly/domain/goal.dart';
 import 'package:goaly/domain/goal_frequency.dart';
 import 'package:goaly/main.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
-import 'package:goaly/services/goaly_collections.dart';
+import 'package:goaly/services/goals/goals_service.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/simple/frequency_dropdown.dart';
 import 'package:goaly/ui/widgets/infrastructure/tappable_card.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ExistingGoalCard extends StatefulWidget {
   final Goal goal;
@@ -58,10 +59,6 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
     return canDelete ?? false;
   }
 
-  Future<void> _handleDismissed(DismissDirection direction) async {
-    await GoalyCollections.goalsOfCurrentUser.doc(widget.goal.id).delete();
-  }
-
   @override
   void dispose() {
     routeObserver.unsubscribe(this);
@@ -80,10 +77,14 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
     final goalDescription = goalsDescriptions
         .singleWhere((element) => element.goalType == widget.goal.goalType);
 
+    final goalService = context.read<GoalsService>();
+
     return Dismissible(
       key: Key(widget.goal.id),
       confirmDismiss: _handleConfirmDismiss,
-      onDismissed: _handleDismissed,
+      onDismissed: (_) {
+        goalService.deleteGoal(widget.goal);
+      },
       child: TappableCard(
         onTap: () {
           setState(() {

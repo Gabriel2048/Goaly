@@ -34,6 +34,14 @@ class GoalsService {
     await GoalyCollections.goalsOfCurrentUser.add(goal.toMap());
   }
 
+  Future<void> deleteGoal(Goal goal) async {
+    for (var occurrence in goal.occurrences) {
+      await _calendarService.deleteEvent(occurrence.googleCalendarEventId);
+    }
+
+    await GoalyCollections.goalsOfCurrentUser.doc(goal.id).delete();
+  }
+
   Stream<List<Goal>> getCurrentUserGoalsSnapshots() {
     final goalsQuery = GoalyCollections.goalsOfCurrentUser;
     return goalsQuery.snapshots().map((snapshot) {
