@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
 import 'package:goaly/ui/widgets/infrastructure/time_list_tile.dart';
+import 'package:provider/provider.dart';
 
-class SameTimeEverydayForm extends StatefulWidget {
+class SameTimeEverydayForm extends StatelessWidget {
   const SameTimeEverydayForm({Key? key}) : super(key: key);
 
   @override
-  State<SameTimeEverydayForm> createState() => _SameTimeEverydayFormState();
-}
-
-class _SameTimeEverydayFormState extends State<SameTimeEverydayForm> {
-  TimeOfDay _time = const TimeOfDay(hour: 12, minute: 0);
-
-  void _onTimeChanged(TimeOfDay newTime) async {
-    setState(() {
-      _time = newTime;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final forProvider = context.watch<GoalFormProvider>();
+    final displayTime = forProvider.selectedDaysTime.entries.isNotEmpty
+        ? forProvider.selectedDaysTime.entries.first.value
+        : forProvider.defaultTime;
     return TimeListTile(
-      pickerInitialTime: _time,
+      pickerInitialTime: forProvider.defaultTime,
       label: const Text(
         "Time of day",
         style: TextStyle(fontSize: 20),
@@ -28,11 +21,13 @@ class _SameTimeEverydayFormState extends State<SameTimeEverydayForm> {
       trailing: Align(
         alignment: Alignment.centerRight,
         child: Text(
-          _time.format(context),
+          displayTime.format(context),
           style: const TextStyle(fontSize: 50),
         ),
       ),
-      onTimeChanged: _onTimeChanged,
+      onTimeChanged: (TimeOfDay newTime) {
+        forProvider.setTime(newTime, null);
+      },
     );
   }
 }
