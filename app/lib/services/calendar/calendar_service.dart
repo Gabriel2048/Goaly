@@ -20,12 +20,13 @@ class CalendarService {
   Future<String> addEvent(
     DateTime start,
     DateTime end,
+    String title,
     List<String> recurrence,
   ) async {
     final timeZone = await _getUsersTimeZone();
 
     final eventToAdd = Event(
-      summary: '[Goaly] My event',
+      summary: '[Goaly] $title',
       start: EventDateTime(
         dateTime: start,
         timeZone: timeZone,

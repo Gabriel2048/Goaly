@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/core/week_days.dart';
 import 'package:goaly/domain/goal_type.dart';
+import 'package:goaly/extensions/goal_type/goal_type_extensions.dart';
 
 class Goal {
   final String id;
   final GoalType goalType;
-  final String? title;
+  final String? _title;
+
+  String get title => _title ?? goalType.toReadable();
 
   final List<GoalOccurrence> occurrences;
 
   const Goal({
     required this.id,
-    required this.title,
+    required String? title,
     required this.goalType,
     this.occurrences = const [],
-  });
+  }) : _title = title;
 
   factory Goal.fromMap(
     Map<String, dynamic> properties,

@@ -26,6 +26,7 @@ class GoalsService {
       final eventId = await _calendarService.addEvent(
         startDate,
         endDate,
+        goal.title,
         recurrence,
       );
       occurrence.googleCalendarEventId = eventId;
