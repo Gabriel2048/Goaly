@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:goaly/domain/goal.dart';
 import 'package:goaly/services/goals/goals_service.dart';
 import 'package:goaly/ui/screens/goals/existing_goal_card.dart';
+import 'package:goaly/ui/screens/goals/no_goals_placeholder.dart';
 import 'package:provider/provider.dart';
 
 class ExistingGoalsList extends StatelessWidget {
@@ -16,6 +17,9 @@ class ExistingGoalsList extends StatelessWidget {
       stream: goalsStream,
       builder: (context, AsyncSnapshot<List<Goal>> snapshot) {
         if (snapshot.hasData) {
+          if(snapshot.data!.isEmpty){
+            return const NoGoalsPlaceholder();
+          }
           return ListView.separated(
             itemCount: snapshot.data!.length,
             itemBuilder: (_, int index) {
