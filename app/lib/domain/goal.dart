@@ -35,7 +35,7 @@ class Goal {
 class GoalOccurrence {
   final WeekDays weekDay;
   final TimeOfDay timeOfDay;
-  late final String googleCalendarEventId;
+  late String googleCalendarEventId;
 
   GoalOccurrence({
     required this.weekDay,
