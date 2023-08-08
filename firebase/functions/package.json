@@ -16,7 +16,7 @@
   "main": "lib/index.js",
   "dependencies": {
     "@googleapis/calendar": "^3.0.0",
-    "firebase-admin": "^10.3.0",
+    "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.2.0",
     "google-auth-library": "^8.7.0"
   },
