@@ -73,12 +73,14 @@ class GoalFormProvider extends ChangeNotifier {
     final addGoalModel = AddGoalModel(
         goalType: goalType, title: title, occurrences: occurrences);
 
-    await _goalsService.addGoal(addGoalModel);
+    try {
+      await _goalsService.addGoal(addGoalModel);
+    } finally {
+      _selectedDaysTime.clear();
+      title = null;
 
-    _selectedDaysTime.clear();
-    title = null;
-
-    setIsSaving(false);
+      setIsSaving(false);
+    }
   }
 
   bool get hasTitleConfigurable => goalType == GoalType.custom;
