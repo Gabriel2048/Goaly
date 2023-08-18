@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/day_picker.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/widgets/day_picker.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/widgets/time_form/frequency_form.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/time_form/frequency_form.dart';
 import 'package:provider/provider.dart';
 
 class AddGoalDetailsAdvancedForm extends StatelessWidget {
