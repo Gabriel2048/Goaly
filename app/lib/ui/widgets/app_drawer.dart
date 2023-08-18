@@ -47,22 +47,17 @@ class AppDrawer extends StatelessWidget {
           icon: Icon(Icons.settings),
         ),
         const Divider(indent: 20, endIndent: 20),
-        Expanded(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: ListTile(
-              title: const Padding(
-                padding: EdgeInsets.only(left: 10),
-                child: Text("Log out"),
-              ),
-              onTap: () async {
-                final navigator = Navigator.of(context);
-                await authService.logOut();
-                navigator.pushReplacement(
-                    MaterialPageRoute(builder: (_) => const AuthScreen()));
-              },
-            ),
+        ListTile(
+          title: const Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text("Log out"),
           ),
+          onTap: () async {
+            final navigator = Navigator.of(context);
+            await authService.logOut();
+            navigator.pushReplacement(
+                MaterialPageRoute(builder: (_) => const AuthScreen()));
+          },
         ),
       ],
     );
