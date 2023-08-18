@@ -9,7 +9,17 @@ import 'package:goaly/services/goals/goals_service.dart';
 class GoalFormProvider extends ChangeNotifier {
   late GoalType goalType;
   String? title;
+  bool isSaving = false;
   final Map<WeekDays, TimeOfDay> _selectedDaysTime = {};
+
+  get canAdd {
+    return isValid && !isSaving;
+  }
+
+  get isValid {
+    final areDaysSelected = _selectedDaysTime.isNotEmpty;
+    return areDaysSelected;
+  }
 
   // ignore: unused_field
   final GoalsService _goalsService;
@@ -17,6 +27,11 @@ class GoalFormProvider extends ChangeNotifier {
   final defaultTime = const TimeOfDay(hour: 12, minute: 0);
 
   GoalFormProvider(this._goalsService);
+
+  void setIsSaving(bool isSaving) {
+    this.isSaving = isSaving;
+    notifyListeners();
+  }
 
   void setGoalType(GoalType goalType) {
     this.goalType = goalType;
@@ -47,7 +62,9 @@ class GoalFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addGoal() {
+  Future<void> addGoal() async {
+    setIsSaving(true);
+
     final occurrences = _selectedDaysTime.entries
         .map((entry) =>
             GoalOccurrence(weekDay: entry.key, timeOfDay: entry.value))
@@ -56,7 +73,9 @@ class GoalFormProvider extends ChangeNotifier {
     final addGoalModel = AddGoalModel(
         goalType: goalType, title: title, occurrences: occurrences);
 
-    return _goalsService.addGoal(addGoalModel);
+    await _goalsService.addGoal(addGoalModel);
+
+    setIsSaving(false);
   }
 
   bool get hasTitleConfigurable => goalType == GoalType.custom;
