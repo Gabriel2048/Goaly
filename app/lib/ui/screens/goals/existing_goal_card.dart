@@ -19,6 +19,7 @@ class ExistingGoalCard extends StatefulWidget {
 class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
   bool isExpanded = false;
   static const padding = 18.0;
+  double dismissProgress = 0.0;
 
   @override
   void initState() {
@@ -77,72 +78,80 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
 
     final goalService = context.read<GoalsService>();
 
-    return Dismissible(
-      key: Key(widget.goal.id),
-      confirmDismiss: _handleConfirmDismiss,
-      onDismissed: (_) {
-        goalService.deleteGoal(widget.goal);
-      },
-      child: TappableCard(
-        onTap: () {
+    return AnimatedOpacity(
+      opacity: dismissProgress > 0.5 ?  1 - dismissProgress : 1.0,
+      duration: Duration.zero,
+      child: Dismissible(
+        key: Key(widget.goal.id),
+        confirmDismiss: _handleConfirmDismiss,
+        onUpdate: (dismissDetails) {
           setState(() {
-            isExpanded = !isExpanded;
+            dismissProgress = dismissDetails.progress;
           });
         },
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 250),
-          height: isExpanded ? 200 : 100,
-          child: Wrap(
-            runAlignment: WrapAlignment.spaceEvenly,
-            clipBehavior: Clip.antiAlias,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: padding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      goalDescription.description,
-                      style: GoogleFonts.chewy(
-                        textStyle:
-                        Theme.of(context).textTheme.headlineSmall,
+        onDismissed: (_) {
+          goalService.deleteGoal(widget.goal);
+        },
+        child: TappableCard(
+          onTap: () {
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+          },
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 250),
+            height: isExpanded ? 200 : 100,
+            child: Wrap(
+              runAlignment: WrapAlignment.spaceEvenly,
+              clipBehavior: Clip.antiAlias,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: padding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        goalDescription.description,
+                        style: GoogleFonts.chewy(
+                          textStyle: Theme.of(context).textTheme.headlineSmall,
+                        ),
                       ),
-                    ),
-                    Image.asset(
-                      goalDescription.assetPath,
-                      color: Colors.white.withOpacity(0.3),
-                      colorBlendMode: BlendMode.modulate,
-                      height: 100,
-                    ),
-                  ],
+                      Image.asset(
+                        goalDescription.assetPath,
+                        color: Colors.white.withOpacity(0.3),
+                        colorBlendMode: BlendMode.modulate,
+                        height: 100,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 18.0),
-                child: Divider(),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: padding),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${widget.goal.occurrences.length} times per week',
-                      style: GoogleFonts.chewy(
-                        textStyle: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 10.0),
-                      child: OutlinedButton(
-                        onPressed: () {},
-                        child: const Text('Check progress'),
-                      ),
-                    )
-                  ],
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Divider(),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(left: padding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${widget.goal.occurrences.length} times per week',
+                        style: GoogleFonts.chewy(
+                          textStyle: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10.0),
+                        child: OutlinedButton(
+                          onPressed: () {},
+                          child: const Text('Check progress'),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
