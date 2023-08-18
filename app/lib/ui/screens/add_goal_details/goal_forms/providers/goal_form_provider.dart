@@ -66,12 +66,17 @@ class GoalFormProvider extends ChangeNotifier {
     setIsSaving(true);
 
     final occurrences = _selectedDaysTime.entries
-        .map((entry) =>
-            GoalOccurrence(weekDay: entry.key, timeOfDay: entry.value))
+        .map((entry) => GoalOccurrence(
+              weekDay: entry.key,
+              timeOfDay: entry.value,
+            ))
         .toList();
 
     final addGoalModel = AddGoalModel(
-        goalType: goalType, title: title, occurrences: occurrences);
+      goalType: goalType,
+      title: title,
+      occurrences: occurrences,
+    );
 
     try {
       await _goalsService.addGoal(addGoalModel);
