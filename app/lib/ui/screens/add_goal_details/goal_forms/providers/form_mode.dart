@@ -1,4 +1,0 @@
-enum FormMode {
-  simple,
-  advanced,
-}
