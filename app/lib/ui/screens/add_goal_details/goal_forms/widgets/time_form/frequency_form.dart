@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/advanced/time_form/per_day_time_form.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/advanced/time_form/same_time_everyday_form.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/widgets/time_form/per_day_time_form.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/widgets/time_form/same_time_everyday_form.dart';
 import 'package:goaly/ui/widgets/infrastructure/switch_list_tile_with_no_ripple.dart';
 import 'package:provider/provider.dart';
 
