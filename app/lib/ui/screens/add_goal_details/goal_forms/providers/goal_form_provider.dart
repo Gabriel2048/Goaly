@@ -75,6 +75,9 @@ class GoalFormProvider extends ChangeNotifier {
 
     await _goalsService.addGoal(addGoalModel);
 
+    _selectedDaysTime.clear();
+    title = null;
+
     setIsSaving(false);
   }
 
