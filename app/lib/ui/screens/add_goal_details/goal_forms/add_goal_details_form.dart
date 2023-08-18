@@ -4,8 +4,8 @@ import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/time_form/frequency_form.dart';
 import 'package:provider/provider.dart';
 
-class AddGoalDetailsAdvancedForm extends StatelessWidget {
-  const AddGoalDetailsAdvancedForm({Key? key}) : super(key: key);
+class AddGoalDetailsForm extends StatelessWidget {
+  const AddGoalDetailsForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/add_goal_details_screen_app_bar.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/add_goal_details_advanced_form.dart';
+import 'package:goaly/ui/screens/add_goal_details/goal_forms/add_goal_details_form.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddGoalDetailsScreen extends StatelessWidget {
@@ -35,7 +35,7 @@ class AddGoalDetailsScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Material(
-                        child: AddGoalDetailsAdvancedForm(),
+                        child: AddGoalDetailsForm(),
                       ),
                     ],
                   ),
