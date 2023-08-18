@@ -4,6 +4,7 @@ import 'package:goaly/ui/screens/add_goal/add_goal_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AddGoalScreen extends StatelessWidget {
+  static const routeName = '/add-goal';
   const AddGoalScreen({Key? key}) : super(key: key);
 
   @override

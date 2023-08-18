@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form_provider.dart';
+import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -23,8 +24,11 @@ class AddGoalDetailsScreenAppBar extends StatelessWidget
         Padding(
           padding: const EdgeInsets.only(right: 25),
           child: FilledButton(
-            onPressed:
-                Provider.of<GoalFormProvider>(context, listen: false).addGoal,
+            onPressed:  () async {
+              final navigator = Navigator.of(context);
+              await Provider.of<GoalFormProvider>(context, listen: false).addGoal();
+              navigator.popUntil(ModalRoute.withName(GoalsScreen.routeName));
+            },
             child: const Text("Add"),
           ),
         ),

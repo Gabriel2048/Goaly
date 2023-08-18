@@ -61,9 +61,7 @@ class _AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                     final navigator = Navigator.of(context);
                     final credentials = await auth.startGoogleAuth();
                     if (credentials != null) {
-                      navigator.pushReplacement(
-                        MaterialPageRoute(builder: (_) => const GoalsScreen()),
-                      );
+                      navigator.pushReplacementNamed(GoalsScreen.routeName);
                     }
                   },
                   icon: const Icon(FontAwesomeIcons.google),

@@ -5,6 +5,7 @@ import 'package:goaly/ui/screens/add_goal_details/goal_forms/add_goal_details_fo
 import 'package:google_fonts/google_fonts.dart';
 
 class AddGoalDetailsScreen extends StatelessWidget {
+  static const routeName = '/add-goal-details';
   final GoalDescription goalDescription;
 
   const AddGoalDetailsScreen({

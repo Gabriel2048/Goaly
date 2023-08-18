@@ -6,6 +6,7 @@ import 'package:goaly/firebase_options.dart';
 import 'package:goaly/infrastructure/providers/application_providers.dart';
 import 'package:goaly/infrastructure/providers/services_providers.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
+import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,19 +41,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(
-      builder: (_, ColorScheme? dark) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Goaly',
-        navigatorObservers: [routeObserver],
-        theme: ThemeData.from(
-          colorScheme: dark ?? const ColorScheme.dark(),
-          useMaterial3: true,
+      builder: (_, ColorScheme? dark) => Consumer<AuthenticationService>(
+        builder: (_, authService, __) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Goaly',
+          navigatorObservers: [routeObserver],
+          theme: ThemeData.from(
+            colorScheme: dark ?? const ColorScheme.dark(),
+            useMaterial3: true,
+          ),
+          routes: {
+            GoalsScreen.routeName: (_) => const GoalsScreen(),
+            AuthScreen.routeName: (_) => const AuthScreen(),
+            AddGoalScreen.routeName: (_) => const AddGoalScreen(),
+          },
+          initialRoute: authService.isLoggedIn
+              ? GoalsScreen.routeName
+              : AuthScreen.routeName,
         ),
-        home: Consumer<AuthenticationService>(builder: (_, authService, __) {
-          return authService.isLoggedIn
-              ? const GoalsScreen()
-              : const AuthScreen();
-        }),
       ),
     );
   }

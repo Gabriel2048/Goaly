@@ -5,6 +5,8 @@ import 'package:goaly/ui/widgets/app_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GoalsScreen extends StatefulWidget {
+  static const routeName = '/goals';
+
   const GoalsScreen({Key? key}) : super(key: key);
 
   @override
@@ -37,10 +39,7 @@ class _GoalsScreenState extends State<GoalsScreen> {
         ),
         icon: const Icon(Icons.add, color: Colors.white),
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const AddGoalScreen()),
-          );
+          Navigator.pushNamed(context, AddGoalScreen.routeName);
         },
       ),
     );
