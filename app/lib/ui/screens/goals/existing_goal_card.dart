@@ -71,6 +71,18 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
     });
   }
 
+  void _captureProgress(DismissUpdateDetails dismissDetails) {
+    setState(() {
+      dismissProgress = dismissDetails.progress;
+    });
+  }
+
+  void _toggleExpanded() {
+    setState(() {
+      isExpanded = !isExpanded;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final goalDescription = goalsDescriptions
@@ -81,11 +93,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
     return Dismissible(
       key: Key(widget.goal.id),
       confirmDismiss: _handleConfirmDismiss,
-      onUpdate: (dismissDetails) {
-        setState(() {
-          dismissProgress = dismissDetails.progress;
-        });
-      },
+      onUpdate: _captureProgress,
       onDismissed: (_) {
         goalService.deleteGoal(widget.goal);
       },
@@ -93,11 +101,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
         opacity: dismissProgress > 0.5 ?  1 - dismissProgress : 1.0,
         duration: const Duration(milliseconds: 100),
         child: TappableCard(
-          onTap: () {
-            setState(() {
-              isExpanded = !isExpanded;
-            });
-          },
+          onTap: _toggleExpanded,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 250),
             height: isExpanded ? 200 : 100,
