@@ -78,20 +78,20 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
 
     final goalService = context.read<GoalsService>();
 
-    return AnimatedOpacity(
-      opacity: dismissProgress > 0.5 ?  1 - dismissProgress : 1.0,
-      duration: Duration.zero,
-      child: Dismissible(
-        key: Key(widget.goal.id),
-        confirmDismiss: _handleConfirmDismiss,
-        onUpdate: (dismissDetails) {
-          setState(() {
-            dismissProgress = dismissDetails.progress;
-          });
-        },
-        onDismissed: (_) {
-          goalService.deleteGoal(widget.goal);
-        },
+    return Dismissible(
+      key: Key(widget.goal.id),
+      confirmDismiss: _handleConfirmDismiss,
+      onUpdate: (dismissDetails) {
+        setState(() {
+          dismissProgress = dismissDetails.progress;
+        });
+      },
+      onDismissed: (_) {
+        goalService.deleteGoal(widget.goal);
+      },
+      child: AnimatedOpacity(
+        opacity: dismissProgress > 0.5 ?  1 - dismissProgress : 1.0,
+        duration: const Duration(milliseconds: 100),
         child: TappableCard(
           onTap: () {
             setState(() {
