@@ -51,7 +51,7 @@ class AddGoalCard extends StatelessWidget {
             transitionDuration: const Duration(milliseconds: 500),
             pageBuilder: (_, animation, ___) =>
                 AddGoalDetailsScreen(goalDescription: goalDescription),
-            transitionsBuilder: (_, animation, __, child) {
+            transitionsBuilder: (_, animation, __, page) {
               return FadeTransition(
                 opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
                   CurvedAnimation(
@@ -59,7 +59,7 @@ class AddGoalCard extends StatelessWidget {
                     curve: Curves.fastOutSlowIn,
                   ),
                 ),
-                child: child,
+                child: page,
               );
             },
           ),
