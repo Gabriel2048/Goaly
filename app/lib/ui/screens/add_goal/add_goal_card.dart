@@ -45,25 +45,25 @@ class AddGoalCard extends StatelessWidget {
         Provider.of<GoalFormProvider>(context, listen: false)
             .setGoalType(goalDescription.goalType);
         Navigator.push(
-            context,
-            PageRouteBuilder(
-              settings:
-                  const RouteSettings(name: AddGoalDetailsScreen.routeName),
-              transitionDuration: const Duration(milliseconds: 500),
-              pageBuilder: (_, animation, ___) =>
-                  AddGoalDetailsScreen(goalDescription: goalDescription),
-              transitionsBuilder: (_, animation, __, child) {
-                return FadeTransition(
-                  opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
-                    CurvedAnimation(
-                      parent: animation,
-                      curve: Curves.fastOutSlowIn,
-                    ),
+          context,
+          PageRouteBuilder(
+            settings: const RouteSettings(name: AddGoalDetailsScreen.routeName),
+            transitionDuration: const Duration(milliseconds: 500),
+            pageBuilder: (_, animation, ___) =>
+                AddGoalDetailsScreen(goalDescription: goalDescription),
+            transitionsBuilder: (_, animation, __, child) {
+              return FadeTransition(
+                opacity: Tween<double>(begin: 0.0, end: 1.0).animate(
+                  CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.fastOutSlowIn,
                   ),
-                  child: child,
-                );
-              },
-            ));
+                ),
+                child: child,
+              );
+            },
+          ),
+        );
       },
     );
   }
