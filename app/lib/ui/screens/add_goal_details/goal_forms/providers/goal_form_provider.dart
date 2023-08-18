@@ -5,10 +5,8 @@ import 'package:goaly/domain/goal.dart';
 import 'package:goaly/domain/goal_type.dart';
 import 'package:goaly/services/goals/add_goal_model.dart';
 import 'package:goaly/services/goals/goals_service.dart';
-import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/form_mode.dart';
 
 class GoalFormProvider extends ChangeNotifier {
-  FormMode formMode = FormMode.simple;
   late GoalType goalType;
   String? title;
   final Map<WeekDays, TimeOfDay> _selectedDaysTime = {};
@@ -19,11 +17,6 @@ class GoalFormProvider extends ChangeNotifier {
   final defaultTime = const TimeOfDay(hour: 12, minute: 0);
 
   GoalFormProvider(this._goalsService);
-
-  void setFormMode(FormMode formMode) {
-    this.formMode = formMode;
-    notifyListeners();
-  }
 
   void setGoalType(GoalType goalType) {
     this.goalType = goalType;
