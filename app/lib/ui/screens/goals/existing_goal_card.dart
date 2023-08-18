@@ -127,7 +127,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "3 times per week",
+                      '${widget.goal.occurrences.length} times per week',
                       style: GoogleFonts.chewy(
                         textStyle: Theme.of(context).textTheme.bodyLarge,
                       ),
