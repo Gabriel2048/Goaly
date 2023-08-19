@@ -16,9 +16,14 @@ class GoalFormProvider extends ChangeNotifier {
     return isValid && !isSaving;
   }
 
+  get isCustomGoalWithNoTitle {
+    return goalType == GoalType.custom &&
+        (title == null || title!.isEmpty || title!.trim().isEmpty);
+  }
+
   get isValid {
     final areDaysSelected = _selectedDaysTime.isNotEmpty;
-    return areDaysSelected;
+    return areDaysSelected && !isCustomGoalWithNoTitle;
   }
 
   // ignore: unused_field

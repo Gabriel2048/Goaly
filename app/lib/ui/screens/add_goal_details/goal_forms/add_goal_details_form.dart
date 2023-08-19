@@ -18,7 +18,7 @@ class AddGoalDetailsForm extends StatelessWidget {
         children: [
           if (hasTitleConfigurable) ...[
             TextFormField(
-              onSaved: goalFormProvider.setTitle,
+              onChanged: goalFormProvider.setTitle,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Title',
