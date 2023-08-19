@@ -26,7 +26,6 @@ class GoalFormProvider extends ChangeNotifier {
     return areDaysSelected && !isCustomGoalWithNoTitle;
   }
 
-  // ignore: unused_field
   final GoalsService _goalsService;
 
   final defaultTime = const TimeOfDay(hour: 12, minute: 0);
