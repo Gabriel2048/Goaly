@@ -12,20 +12,6 @@ class GoalFormProvider extends ChangeNotifier {
   bool isSaving = false;
   final Map<WeekDays, TimeOfDay> _selectedDaysTime = {};
 
-  get canAdd {
-    return isValid && !isSaving;
-  }
-
-  get isCustomGoalWithNoTitle {
-    return goalType == GoalType.custom &&
-        (title == null || title!.isEmpty || title!.trim().isEmpty);
-  }
-
-  get isValid {
-    final areDaysSelected = _selectedDaysTime.isNotEmpty;
-    return areDaysSelected && !isCustomGoalWithNoTitle;
-  }
-
   final GoalsService _goalsService;
 
   final defaultTime = const TimeOfDay(hour: 12, minute: 0);
@@ -100,4 +86,18 @@ class GoalFormProvider extends ChangeNotifier {
 
   UnmodifiableMapView<WeekDays, TimeOfDay> get selectedDaysTime =>
       UnmodifiableMapView(_selectedDaysTime);
+
+  bool get canAdd {
+    return isValid && !isSaving;
+  }
+
+  bool get isCustomGoalWithNoTitle {
+    return goalType == GoalType.custom &&
+        (title == null || title!.isEmpty || title!.trim().isEmpty);
+  }
+
+  bool get isValid {
+    final areDaysSelected = _selectedDaysTime.isNotEmpty;
+    return areDaysSelected && !isCustomGoalWithNoTitle;
+  }
 }
