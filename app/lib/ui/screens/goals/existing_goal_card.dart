@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:goaly/domain/goal.dart';
+import 'package:goaly/domain/goal_type.dart';
 import 'package:goaly/main.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/services/goals/goals_service.dart';
@@ -88,6 +89,10 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
     final goalDescription = goalsDescriptions
         .singleWhere((element) => element.goalType == widget.goal.goalType);
 
+    final goalTitle = widget.goal.goalType == GoalType.custom
+        ? widget.goal.title
+        : goalDescription.description;
+
     final goalService = context.read<GoalsService>();
 
     return Dismissible(
@@ -115,7 +120,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        goalDescription.description,
+                        goalTitle,
                         style: GoogleFonts.chewy(
                           textStyle: Theme.of(context).textTheme.headlineSmall,
                         ),
