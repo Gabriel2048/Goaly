@@ -4,6 +4,7 @@ import 'package:goaly/domain/goal_type.dart';
 import 'package:goaly/main.dart';
 import 'package:goaly/providers/goals_descriptions_provider.dart';
 import 'package:goaly/services/goals/goals_service.dart';
+import 'package:goaly/ui/screens/goal_progress/goal_progress_screen.dart';
 import 'package:goaly/ui/widgets/infrastructure/tappable_card.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -84,6 +85,13 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
     });
   }
 
+  void _goToGoalProgress() {
+    Navigator.of(context).pushNamed(
+      GoalProgressScreen.routeName,
+      arguments: widget.goal,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final goalDescription = goalsDescriptions
@@ -103,7 +111,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
         goalService.deleteGoal(widget.goal);
       },
       child: AnimatedOpacity(
-        opacity: dismissProgress > 0.5 ?  1 - dismissProgress : 1.0,
+        opacity: dismissProgress > 0.5 ? 1 - dismissProgress : 1.0,
         duration: const Duration(milliseconds: 100),
         child: TappableCard(
           onTap: _toggleExpanded,
@@ -119,10 +127,13 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        goalTitle,
-                        style: GoogleFonts.chewy(
-                          textStyle: Theme.of(context).textTheme.headlineSmall,
+                      Hero(
+                        tag: widget.goal.id,
+                        child: Text(
+                          goalTitle,
+                          style: GoogleFonts.chewy(
+                            textStyle: Theme.of(context).textTheme.headlineSmall,
+                          ),
                         ),
                       ),
                       Image.asset(
@@ -152,7 +163,7 @@ class _ExistingGoalCardState extends State<ExistingGoalCard> with RouteAware {
                       Padding(
                         padding: const EdgeInsets.only(right: 10.0),
                         child: OutlinedButton(
-                          onPressed: () {},
+                          onPressed: _goToGoalProgress,
                           child: const Text('Check progress'),
                         ),
                       )

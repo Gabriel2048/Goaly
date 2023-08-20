@@ -8,6 +8,7 @@ import 'package:goaly/infrastructure/providers/services_providers.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
+import 'package:goaly/ui/screens/goal_progress/goal_progress_screen.dart';
 import 'package:goaly/ui/screens/goals/goals_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
             GoalsScreen.routeName: (_) => const GoalsScreen(),
             AuthScreen.routeName: (_) => const AuthScreen(),
             AddGoalScreen.routeName: (_) => const AddGoalScreen(),
+            GoalProgressScreen.routeName: (_) => const GoalProgressScreen(),
           },
           initialRoute: authService.isLoggedIn
               ? GoalsScreen.routeName
