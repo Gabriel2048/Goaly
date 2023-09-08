@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
+import 'package:goaly/services/notifications/notification_service.dart';
 import 'package:goaly/ui/screens/goals/existing_goals_list.dart';
 import 'package:goaly/ui/widgets/app_drawer.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +14,16 @@ class GoalsScreen extends StatefulWidget {
 }
 
 class _GoalsScreenState extends State<GoalsScreen> {
+  Future<void> _onTapTest() async {
+    await NotificationsService.ensurePermissions();
+    // await NotificationsService.showNotification(
+    //   id: 1,
+    //   title: 'Going to the gym',
+    //   body: 'Have you done it?',
+    // );
+    NotificationsService.scheduleWeeklyNotification();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +49,8 @@ class _GoalsScreenState extends State<GoalsScreen> {
         ),
         icon: const Icon(Icons.add, color: Colors.white),
         onPressed: () {
-          Navigator.pushNamed(context, AddGoalScreen.routeName);
+          _onTapTest();
+          // Navigator.pushNamed(context, AddGoalScreen.routeName);
         },
       ),
     );

@@ -6,6 +6,7 @@ import 'package:goaly/firebase_options.dart';
 import 'package:goaly/infrastructure/providers/application_providers.dart';
 import 'package:goaly/infrastructure/providers/services_providers.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
+import 'package:goaly/services/notifications/notification_service.dart';
 import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/goal_progress/goal_progress_screen.dart';
@@ -22,6 +23,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: await DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationsService.initApplication();
   FirebaseFunctions.instance.useFunctionsEmulator("192.168.0.104", 5001);
   // FirebaseAuth.instance.useAuthEmulator("192.168.0.104", 9099);
   // FirebaseFirestore.instance.useFirestoreEmulator("192.168.0.104", 8080);
