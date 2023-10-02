@@ -3,6 +3,7 @@ import 'package:goaly/services/calendar/calendar_service.dart';
 import 'package:goaly/services/goals/add_goal_model.dart';
 import 'package:goaly/services/goals/recurrence_builder.dart';
 import 'package:goaly/services/goaly_collections.dart';
+import 'package:goaly/services/notifications/notification_service.dart';
 
 class GoalsService {
   final CalendarService _calendarService;
@@ -30,6 +31,10 @@ class GoalsService {
         recurrence,
       );
       occurrence.googleCalendarEventId = eventId;
+      final notificationTime = startDate.add(
+        const Duration(hours: 1, minutes: 3),
+      );
+      await NotificationsService.scheduleWeeklyNotification(notificationTime);
     }
 
     await GoalyCollections.goalsOfCurrentUser.add(goal.toMap());

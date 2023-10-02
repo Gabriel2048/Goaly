@@ -43,8 +43,7 @@ class NotificationsService {
         payload: payload);
   }
 
-  static Future<void> scheduleWeeklyNotification() async {
-    await NotificationTimezoneService.initTimezoneData();
+  static Future<void> scheduleWeeklyNotification(DateTime time) async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
       'your channel id',
@@ -63,7 +62,7 @@ class NotificationsService {
       0,
       'other',
       'something',
-      NotificationTimezoneService.nextInstanceOfMondayTenAM(),
+      TimezoneService.getNextForDateTime(time),
       notificationDetails,
       androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:

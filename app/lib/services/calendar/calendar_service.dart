@@ -10,7 +10,7 @@ class CalendarService {
 
   CalendarService(this._googleAuthService);
 
-  Future<String> _getUsersTimeZone() async {
+  Future<String> getUsersTimeZone() async {
     final calendar = await _runWithCalendarClient(
       (calendarClient) => calendarClient.calendars.get('primary'),
     );
@@ -23,7 +23,7 @@ class CalendarService {
     String title,
     List<String> recurrence,
   ) async {
-    final timeZone = await _getUsersTimeZone();
+    final timeZone = await getUsersTimeZone();
 
     final eventToAdd = Event(
       summary: '[Goaly] $title',
@@ -68,7 +68,7 @@ class CalendarService {
     int currentWeekday = now.weekday;
     int targetWeekday = day.index + 1;
 
-    if (targetWeekday <= currentWeekday) {
+    if (targetWeekday < currentWeekday) {
       targetWeekday += 7;
     }
 

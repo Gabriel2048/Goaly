@@ -1,12 +1,14 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:goaly/firebase_options.dart';
 import 'package:goaly/infrastructure/providers/application_providers.dart';
 import 'package:goaly/infrastructure/providers/services_providers.dart';
 import 'package:goaly/services/authentication/authentication_service.dart';
 import 'package:goaly/services/notifications/notification_service.dart';
+import 'package:goaly/services/notifications/notification_timezone_service.dart';
 import 'package:goaly/ui/screens/add_goal/add_goal_screen.dart';
 import 'package:goaly/ui/screens/auth/auth_screen.dart';
 import 'package:goaly/ui/screens/goal_progress/goal_progress_screen.dart';
@@ -38,8 +40,24 @@ Future<void> main() async {
 
 final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      final timeZoneNotificationService =
+          Provider.of<TimezoneService>(context, listen: false);
+      timeZoneNotificationService.initTimezoneData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
