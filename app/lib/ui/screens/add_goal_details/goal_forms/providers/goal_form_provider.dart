@@ -36,14 +36,15 @@ class GoalFormProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setTime(TimeOfDay time, WeekDays? day) {
-    if (day == null) {
-      _selectedDaysTime.forEach((key, value) {
-        _selectedDaysTime[key] = time;
-      });
-    } else {
-      _selectedDaysTime[day] = time;
-    }
+  void setTimeForDay(WeekDays day, TimeOfDay time) {
+    _selectedDaysTime[day] = time;
+    notifyListeners();
+  }
+
+  void setTimeForAllDays(TimeOfDay time) {
+    _selectedDaysTime.forEach((key, value) {
+      _selectedDaysTime[key] = time;
+    });
     notifyListeners();
   }
 

@@ -28,21 +28,27 @@ class DayPicker extends StatelessWidget {
 class DayButton extends StatelessWidget {
   final WeekDays weekDay;
 
-  const DayButton({
-    Key? key,
-    required this.weekDay,
-  }) : super(key: key);
+  const DayButton({Key? key, required this.weekDay}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final selectedWeekDays = context.watch<GoalFormProvider>();
+    final goalFormProvider = context.watch<GoalFormProvider>();
+    final selectedDays = goalFormProvider.selectedDays;
+    final selectedGoalColor =
+        Theme.of(context).buttonTheme.colorScheme?.secondaryContainer;
 
     return OutlinedButton(
-      onPressed: () => selectedWeekDays.toggleDay(weekDay),
+      onPressed: () {
+        final isDeselectingSingleDay =
+            selectedDays.length == 1 && selectedDays.contains(weekDay);
+        if (isDeselectingSingleDay) {
+          return;
+        }
+        goalFormProvider.toggleDay(weekDay);
+      },
       style: ElevatedButton.styleFrom(
-        backgroundColor: selectedWeekDays.containsDay(weekDay)
-            ? Theme.of(context).buttonTheme.colorScheme?.secondaryContainer
-            : null,
+        backgroundColor:
+            goalFormProvider.containsDay(weekDay) ? selectedGoalColor : null,
         padding: EdgeInsets.zero,
       ),
       child: Center(child: Text(weekDay.name[0].toUpperCase())),

@@ -5,8 +5,8 @@ import 'package:goaly/ui/screens/add_goal_details/goal_forms/providers/goal_form
 import 'package:goaly/ui/widgets/infrastructure/time_list_tile.dart';
 import 'package:provider/provider.dart';
 
-class PerDayTimeForm extends StatelessWidget {
-  const PerDayTimeForm({Key? key}) : super(key: key);
+class DayTimeDateInput extends StatelessWidget {
+  const DayTimeDateInput({Key? key}) : super(key: key);
 
   int _sortByDayIndex(WeekDays left, WeekDays right) {
     return left.index.compareTo(right.index);
@@ -20,21 +20,21 @@ class PerDayTimeForm extends StatelessWidget {
       ..sort(_sortByDayIndex);
 
     return Column(
-      children: selectedWeekDays.map((e) {
+      children: selectedWeekDays.map((day) {
         return TimeListTile(
-          key: ValueKey(e),
+          key: ValueKey(day),
           onTimeChanged: (newTime) {
-            goalFormProvider.setTime(newTime, e);
+            goalFormProvider.setTimeForDay(day, newTime);
           },
           pickerInitialTime: goalFormProvider.defaultTime,
           label: Text(
-            e.name.capitalize(),
+            day.name.capitalize(),
             style: const TextStyle(fontSize: 20),
           ),
           trailing: Align(
             alignment: Alignment.centerRight,
             child: Text(
-              selectedDaysTime[e]!.format(context),
+              selectedDaysTime[day]!.format(context),
               style: const TextStyle(fontSize: 50),
             ),
           ),
